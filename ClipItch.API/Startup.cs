@@ -1,17 +1,13 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ClipItch.API.Configuration;
+using ClipItch.API.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Refit;
 
 namespace ClipItch.API
 {
@@ -32,6 +28,11 @@ namespace ClipItch.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ClipItch", Version = "v1" });
             });
+
+            var baseUrl = Configuration["TwitchAPI"].ToString();
+
+            services.AddRefitClient<IClipeInterface>()
+            .ConfigureHttpClient(options => options.BaseAddress = new Uri(baseUrl));
 
             services.ResolveDependencies();
         }

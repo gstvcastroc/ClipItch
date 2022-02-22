@@ -1,6 +1,11 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using ClipItch.API.Interface;
+using ClipItch.API.Models;
+using ClipItch.API.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClipItch.API.Controllers
@@ -9,10 +14,12 @@ namespace ClipItch.API.Controllers
     [ApiController]
     public class ClipesController : BaseController
     {
+        private readonly IClipeInterface _clipeInterface;
         private readonly IMapper _mapper;
 
-        public ClipesController(IMapper mapper)
+        public ClipesController(IClipeInterface clipeInterface, IMapper mapper)
         {
+            _clipeInterface = clipeInterface;
             _mapper = mapper;
         }
 
@@ -26,8 +33,8 @@ namespace ClipItch.API.Controllers
         public async Task<IActionResult> GetAll()
         {
             try
-            {
-                return Ok(string.Format("Teste {0}", 1));
+            {   
+                return Ok(await _clipeInterface.GetClipes());
             }
             catch (Exception ex)
             {
