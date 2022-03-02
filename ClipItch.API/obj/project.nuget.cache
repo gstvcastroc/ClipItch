@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "7mKQJrzeOp265m3p44zanDVYEoktFsBEY7uyweep6HXGbte06aVWw5VDfeXdZ5sbickqB/unYz6gZ1c0CF4WWA==",
+  "dgSpecHash": "nLCsl8d2LM5Mj49pOHEWEKoO5/UPTWjNHpWh/R4W00MqoOlQoG0rlMESAGRLFLZmrQebw/gEEtKpUXbR9p1zvQ==",
   "success": true,
   "projectFilePath": "C:\\Projetos\\ClipItch\\ClipItch.API\\ClipItch.API.csproj",
   "expectedPackageFiles": [
@@ -16,6 +16,7 @@
     "C:\\Users\\gstvc\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
     "C:\\Users\\gstvc\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
     "C:\\Users\\gstvc\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\gstvc\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\gstvc\\.nuget\\packages\\refit\\6.3.2\\refit.6.3.2.nupkg.sha512",
     "C:\\Users\\gstvc\\.nuget\\packages\\refit.httpclientfactory\\6.3.2\\refit.httpclientfactory.6.3.2.nupkg.sha512",
     "C:\\Users\\gstvc\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",

@@ -1,11 +1,7 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using ClipItch.API.Interface;
-using ClipItch.API.Models;
-using ClipItch.API.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClipItch.API.Controllers
@@ -25,7 +21,7 @@ namespace ClipItch.API.Controllers
 
         [HttpGet("inicio")]
         public IActionResult Index()
-        {            
+        {
             return Ok("Teste");
         }
 
@@ -33,7 +29,7 @@ namespace ClipItch.API.Controllers
         public async Task<IActionResult> GetAll()
         {
             try
-            {   
+            {
                 return Ok(await _clipeInterface.GetClipes());
             }
             catch (Exception ex)
@@ -53,6 +49,6 @@ namespace ClipItch.API.Controllers
             {
                 throw ex;
             }
-        }
+        }   
     }
 }

@@ -8,5 +8,6 @@
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0"/>
 		<PackageReference Include="Refit" Version="6.3.2"/>
 		<PackageReference Include="Refit.HttpClientFactory" Version="6.3.2"/>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
 	</ItemGroup>
 </Project>
