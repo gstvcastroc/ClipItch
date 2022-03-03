@@ -8,8 +8,8 @@ namespace ClipItch.API.Configuration
 {
     public class Conexao
     {
-        public string ClientId { get {return "Client_Id";} }
-        private string ClientSecret { get {return "Client_Secret";} }
+        public string ClientId { get {return "Client_Secret";} }
+        private string ClientSecret { get {return "Client_Id";} }
         private string GrantType { get {return "client_credentials";} }
 
         public async Task<TokenViewModel> ObterToken()
