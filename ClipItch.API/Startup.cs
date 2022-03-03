@@ -1,13 +1,11 @@
 using System;
 using ClipItch.API.Configuration;
-using ClipItch.API.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Refit;
 
 namespace ClipItch.API
 {
@@ -26,15 +24,25 @@ namespace ClipItch.API
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ClipItch", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "ClipItch",
+                    Version = "v1",
+                    Description = "Documentação dos EndPoints do Clipitch API",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Gustavo Castro",
+                        Url = new Uri("https://github.com/gstvcastroc")
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "License",
+                        Url = new Uri("https://openlearninglibrary.mit.edu/tos")
+                    }
+                });
             });
 
-            var baseUrl = Configuration["TwitchAPI"].ToString();
-
-            services.AddRefitClient<IClipeInterface>()
-            .ConfigureHttpClient(options => options.BaseAddress = new Uri(baseUrl));
-
-            services.ResolveDependencies();
+            services.ResolveDependencies(Configuration);
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -42,7 +50,7 @@ namespace ClipItch.API
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ClipItch"));
+                app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "ClipItch"); c.RoutePrefix = string.Empty; });
             }
 
             app.ResolveBuild();

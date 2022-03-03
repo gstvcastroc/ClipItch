@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using ClipItch.API.Configuration;
 using ClipItch.API.Interface;
 using ClipItch.API.ViewModels;
+using ClipItch.API.ViewModels.Games;
 using Microsoft.AspNetCore.Mvc;
 using Refit;
 
@@ -11,39 +12,39 @@ namespace ClipItch.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClipesController : Controller
+    public class GameController : ControllerBase
     {
-        private readonly IClipeInterface _clipeInterface;
+        private readonly IGameInterface _gameInterface;        
         private readonly Conexao _conexao;
 
-        public ClipesController(IClipeInterface clipeInterface)
+        public GameController(IGameInterface gameInterface)
         {
-            _clipeInterface = clipeInterface;
+            _gameInterface = gameInterface;
             _conexao = new Conexao();
         }
-        
-        [HttpGet("obterTodos")]
-        public async Task<IActionResult> GetAll()
+
+        [HttpGet("topGames")]
+        public async Task<IActionResult> GetTopGames()
         {
             try
             {
                 TokenViewModel tokenViewModel = await _conexao.ObterToken();
 
-                var callback = RestService.For<IClipeInterface>("https://api.twitch.tv/", new RefitSettings()
+                var callback = RestService.For<IGameInterface>("https://api.twitch.tv/", new RefitSettings()
                 {
                     AuthorizationHeaderValueGetter = () => Task.FromResult(tokenViewModel.access_token)
                 });
 
-                var result = callback.GetClipes(21779, _conexao.ClientId).Result;
+                var result = callback.GetTopGames(_conexao.ClientId).Result;
 
-                List<ClipesViewModel> listaClipes = result.data;
+                List<GameViewModel> gamesList = result.data;
 
-                return Ok(listaClipes);
+                return Ok(gamesList);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-        }
+        }        
     }
 }

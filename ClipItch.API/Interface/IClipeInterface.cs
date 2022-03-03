@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using ClipItch.API.ViewModels;
 using Refit;
 
 namespace ClipItch.API.Interface
@@ -7,6 +8,6 @@ namespace ClipItch.API.Interface
     {
         [Get("/helix/clips?game_id={id}")]
         [Headers("Authorization: Bearer")]
-        Task<dynamic> GetClipes(int id, [Header("Client-Id")] string client_id);
+        Task<ClipesRootViewModel> GetClipes(int id, [Header("Client-Id")] string client_id);
     }
 }
