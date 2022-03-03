@@ -13,7 +13,7 @@ namespace ClipItch.API.Configuration
 
         private void MapModelToViewModel()
         {
-            CreateMap<Clipe, ClipeViewModel>().ReverseMap();
+            CreateMap<Clipe, ClipesViewModel>().ReverseMap();
         }
     }
 }

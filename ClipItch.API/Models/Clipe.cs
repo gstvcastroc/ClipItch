@@ -12,7 +12,6 @@ namespace ClipItch.API.Models
         public int Views { get; set; }
         public float Duration { get; set; }
         public DateTime CreatedAte { get; set; }
-
         public BroadCaster BroadCaster { get; set; }
         public Curator Curator { get; set; }
         public Vod Vod { get; set; }
