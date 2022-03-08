@@ -4,7 +4,7 @@ namespace API.ViewModels.Games
 {
     public class GamesRootViewModel
     {
-        public List<GameViewModel> data { get; set; }
-        public PaginationViewModel pagination { get; set; }
+        public List<GameViewModel> Data { get; set; }
+        public PaginationViewModel Pagination { get; set; }
     }
 }

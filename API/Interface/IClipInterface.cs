@@ -8,6 +8,6 @@ namespace API.Interface
     {
         [Get("/helix/clips?game_id={id}")]
         [Headers("Authorization: Bearer")]
-        Task<ClipsRootViewModel> GetClipes(int id, [Header("Client-Id")] string client_id);
+        Task<ClipsRootViewModel> GetClips(int id, [Header("Client-Id")] string client_id);
     }
 }

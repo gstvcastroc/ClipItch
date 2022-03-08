@@ -2,8 +2,8 @@ namespace API.ViewModels.Games
 {
     public class GameViewModel
     {
-        public string id { get; set; }
-        public string name { get; set; }
-        public string box_art_url { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string BoxArtUrl { get; set; }
     }
 }

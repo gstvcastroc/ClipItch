@@ -37,7 +37,7 @@ namespace API.Controllers
 
                 var result = callback.GetTopGames(_conexao.ClientId).Result;
 
-                List<GameViewModel> gamesList = result.data;
+                List<GameViewModel> gamesList = result.Data;
 
                 return Ok(gamesList);
             }

@@ -42,18 +42,18 @@ namespace API.Controllers
 
                 List<ClipsViewModel> listaRetorno = new List<ClipsViewModel>();
 
-                foreach (GameViewModel item in resultGames.data)
+                foreach (GameViewModel item in resultGames.Data)
                 {
-                    int idGame = int.Parse(item.id);
+                    int idGame = int.Parse(item.Id);
 
                     var callback = RestService.For<IClipInterface>("https://api.twitch.tv/", new RefitSettings()
                     {
                         AuthorizationHeaderValueGetter = () => Task.FromResult(tokenViewModel.AccessToken)
                     });
 
-                    var result = callback.GetClipes(idGame, _conexao.ClientId).Result;
+                    var result = callback.GetClips(idGame, _conexao.ClientId).Result;
 
-                    listaRetorno = listaRetorno.AsEnumerable().Union(result.data.AsEnumerable()).ToList();
+                    listaRetorno = listaRetorno.AsEnumerable().Union(result.Data.AsEnumerable()).ToList();
                 }
 
                 //ToDo: Melhorar performance colocando as requisções em um banco e buscando dele mesmo.
