@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6fRogNaALFxRoGdix9xg6eD+YGMZMLZqsI4WDp56Ah76QcOYquOiQbphezPUlrkKjftOdr8lkz5yGcL8OLWCDA==",
+  "dgSpecHash": "OIMXVVYF6ooZwFfCstud5o991FNAYz6fZYXFXRYTgpjsW/NTvvmREKRGraMISKwJNXoeix8kQKZESQGi/iE8sg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\alons\\Projetos\\Clipitch\\ClipItch.API\\ClipItch.API.csproj",
+  "projectFilePath": "C:\\Users\\alons\\Projetos\\Clipitch\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\alons\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\alons\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
