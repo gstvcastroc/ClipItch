@@ -1,5 +1,5 @@
 using System;
-using ClipItch.API.Configuration;
+using API.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
-namespace ClipItch.API
+namespace API
 {
     public class Startup
     {

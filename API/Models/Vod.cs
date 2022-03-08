@@ -1,4 +1,4 @@
-namespace ClipItch.API.Models
+namespace API.Models
 {
     public class Vod
     {

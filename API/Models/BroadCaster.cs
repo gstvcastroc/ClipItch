@@ -1,6 +1,6 @@
-namespace ClipItch.API.Models
+namespace API.Models
 {
-    public class BroadCaster
+    public class Broadcaster
     {
         public int Id { get; set; }
         public string Name { get; set; }        

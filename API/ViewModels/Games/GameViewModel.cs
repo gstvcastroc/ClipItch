@@ -1,4 +1,4 @@
-namespace ClipItch.API.ViewModels.Games
+namespace API.ViewModels.Games
 {
     public class GameViewModel
     {

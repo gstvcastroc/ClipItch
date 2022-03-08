@@ -1,26 +1,26 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ClipItch.API.Configuration;
-using ClipItch.API.Interface;
-using ClipItch.API.ViewModels;
-using ClipItch.API.ViewModels.Games;
+using API.Configuration;
+using API.Interface;
+using API.ViewModels;
+using API.ViewModels.Games;
 using Microsoft.AspNetCore.Mvc;
 using Refit;
 
-namespace ClipItch.API.Controllers
+namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class GameController : ControllerBase
     {
         private readonly IGameInterface _gameInterface;        
-        private readonly Conexao _conexao;
+        private readonly Connection _conexao;
 
         public GameController(IGameInterface gameInterface)
         {
             _gameInterface = gameInterface;
-            _conexao = new Conexao();
+            _conexao = new Connection();
         }
 
         [HttpGet("topGames")]
@@ -28,11 +28,11 @@ namespace ClipItch.API.Controllers
         {
             try
             {
-                TokenViewModel tokenViewModel = await _conexao.ObterToken();
+                TokenViewModel tokenViewModel = await _conexao.GetToken();
 
                 var callback = RestService.For<IGameInterface>("https://api.twitch.tv/", new RefitSettings()
                 {
-                    AuthorizationHeaderValueGetter = () => Task.FromResult(tokenViewModel.access_token)
+                    AuthorizationHeaderValueGetter = () => Task.FromResult(tokenViewModel.AccessToken)
                 });
 
                 var result = callback.GetTopGames(_conexao.ClientId).Result;

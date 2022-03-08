@@ -1,10 +1,10 @@
-using ClipItch.API.Models;
-using ClipItch.API.ViewModels;
+using API.Models;
+using API.ViewModels;
 using AutoMapper;
 
-namespace ClipItch.API.Configuration
+namespace API.Configuration
 {
-    public class AutoMapperConfig : Profile
+  public class AutoMapperConfig : Profile
     {
         public AutoMapperConfig()
         {
@@ -13,7 +13,7 @@ namespace ClipItch.API.Configuration
 
         private void MapModelToViewModel()
         {
-            CreateMap<Clipe, ClipesViewModel>().ReverseMap();
+            CreateMap<Clip, ClipsViewModel>().ReverseMap();
         }
     }
 }

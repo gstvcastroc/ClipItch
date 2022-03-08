@@ -1,29 +1,29 @@
+using API.Configuration;
+using API.Interface;
+using API.ViewModels;
+using API.ViewModels.Games;
+using Microsoft.AspNetCore.Mvc;
+using Refit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ClipItch.API.Configuration;
-using ClipItch.API.Interface;
-using ClipItch.API.ViewModels;
-using ClipItch.API.ViewModels.Games;
-using Microsoft.AspNetCore.Mvc;
-using Refit;
 
-namespace ClipItch.API.Controllers
+namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClipesController : Controller
+    public class ClipsController : Controller
     {
-        private readonly IClipeInterface _clipeInterface;
+        private readonly IClipInterface _clipInterface;
         private readonly IGameInterface _gameInterface;
-        private readonly Conexao _conexao;
+        private readonly Connection _conexao;
 
-        public ClipesController(IClipeInterface clipeInterface, IGameInterface gameInterface)
+        public ClipsController(IClipInterface clipeInterface, IGameInterface gameInterface)
         {
-            _clipeInterface = clipeInterface;
+            _clipInterface = clipeInterface;
             _gameInterface = gameInterface;
-            _conexao = new Conexao();
+            _conexao = new Connection();
         }
 
         [HttpGet("obterTodos")]
@@ -31,24 +31,24 @@ namespace ClipItch.API.Controllers
         {
             try
             {
-                TokenViewModel tokenViewModel = await _conexao.ObterToken();
+                TokenViewModel tokenViewModel = await _conexao.GetToken();
 
                 var callbackGames = RestService.For<IGameInterface>("https://api.twitch.tv/", new RefitSettings()
                 {
-                    AuthorizationHeaderValueGetter = () => Task.FromResult(tokenViewModel.access_token)
+                    AuthorizationHeaderValueGetter = () => Task.FromResult(tokenViewModel.AccessToken)
                 });
 
                 var resultGames = callbackGames.GetTopGames(_conexao.ClientId).Result;
 
-                List<ClipesViewModel> listaRetorno = new List<ClipesViewModel>();
+                List<ClipsViewModel> listaRetorno = new List<ClipsViewModel>();
 
                 foreach (GameViewModel item in resultGames.data)
                 {
                     int idGame = int.Parse(item.id);
 
-                    var callback = RestService.For<IClipeInterface>("https://api.twitch.tv/", new RefitSettings()
+                    var callback = RestService.For<IClipInterface>("https://api.twitch.tv/", new RefitSettings()
                     {
-                        AuthorizationHeaderValueGetter = () => Task.FromResult(tokenViewModel.access_token)
+                        AuthorizationHeaderValueGetter = () => Task.FromResult(tokenViewModel.AccessToken)
                     });
 
                     var result = callback.GetClipes(idGame, _conexao.ClientId).Result;

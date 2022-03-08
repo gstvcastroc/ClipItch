@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
-using ClipItch.API.ViewModels.Games;
+using API.ViewModels.Games;
 using Refit;
 
-namespace ClipItch.API.Interface
+namespace API.Interface
 {
     public interface IGameInterface
     {

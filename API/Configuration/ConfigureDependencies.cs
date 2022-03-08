@@ -1,11 +1,11 @@
-using System;
-using ClipItch.API.Interface;
+using API.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Refit;
+using System;
 
-namespace ClipItch.API.Configuration
+namespace API.Configuration
 {
     public static class ConfigureDependencies
     {
@@ -16,7 +16,7 @@ namespace ClipItch.API.Configuration
             services.AddRefitClient<IGameInterface>()
             .ConfigureHttpClient(options => options.BaseAddress = new Uri(baseUrl));
 
-            services.AddRefitClient<IClipeInterface>()
+            services.AddRefitClient<IClipInterface>()
             .ConfigureHttpClient(options => options.BaseAddress = new Uri(baseUrl));
 
             services.AddSingleton(new AutoMapperConfig());

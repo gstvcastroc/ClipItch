@@ -1,8 +1,8 @@
 using System;
 
-namespace ClipItch.API.ViewModels
+namespace API.ViewModels
 {
-    public class ClipesViewModel
+    public class ClipsViewModel
     {
         public string id { get; set; }
         public string url { get; set; }

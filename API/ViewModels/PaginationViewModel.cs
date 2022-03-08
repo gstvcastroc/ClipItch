@@ -1,4 +1,4 @@
-namespace ClipItch.API.ViewModels
+namespace API.ViewModels
 {
     public class PaginationViewModel
     {

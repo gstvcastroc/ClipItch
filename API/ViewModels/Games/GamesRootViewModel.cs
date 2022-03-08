@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace ClipItch.API.ViewModels.Games
+namespace API.ViewModels.Games
 {
     public class GamesRootViewModel
     {

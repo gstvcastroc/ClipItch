@@ -1,6 +1,6 @@
-namespace ClipItch.API.Models
+namespace API.Models
 {
-    public class ThumbNails
+    public class Thumbnails
     {
         public string Medium { get; set; }
         public string Small { get; set; }
