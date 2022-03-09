@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using API.ViewModels;
+using API.ViewModels.Clips;
 using Refit;
 
 namespace API.Interface

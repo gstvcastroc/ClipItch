@@ -1,6 +1,7 @@
 using API.Configuration;
 using API.Interface;
 using API.ViewModels;
+using API.ViewModels.Clips;
 using API.ViewModels.Games;
 using Microsoft.AspNetCore.Mvc;
 using Refit;
@@ -44,7 +45,7 @@ namespace API.Controllers
 
                 foreach (GameViewModel item in resultGames.data)
                 {
-                    int idGame = int.Parse(item.Id);
+                    int idGame = int.Parse(item.id);
 
                     var callback = RestService.For<IClipInterface>("https://api.twitch.tv/", new RefitSettings()
                     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace API.ViewModels
+namespace API.ViewModels.Clips
 {
     public class ClipsViewModel
     {

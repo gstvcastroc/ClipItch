@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace API.ViewModels
+namespace API.ViewModels.Clips
 {
     public class ClipsRootViewModel
     {
