@@ -4,7 +4,7 @@ namespace API.ViewModels
 {
     public class ClipsRootViewModel
     {
-        public List<ClipsViewModel> Data { get; set; }
-        public PaginationViewModel Pagination { get; set; }
+        public List<ClipsViewModel> data { get; set; }
+        public PaginationViewModel pagination { get; set; }
     }
 }

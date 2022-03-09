@@ -35,25 +35,25 @@ namespace API.Controllers
 
                 var callbackGames = RestService.For<IGameInterface>("https://api.twitch.tv/", new RefitSettings()
                 {
-                    AuthorizationHeaderValueGetter = () => Task.FromResult(tokenViewModel.AccessToken)
+                    AuthorizationHeaderValueGetter = () => Task.FromResult(tokenViewModel.access_token)
                 });
 
                 var resultGames = callbackGames.GetTopGames(_conexao.ClientId).Result;
 
                 List<ClipsViewModel> listaRetorno = new List<ClipsViewModel>();
 
-                foreach (GameViewModel item in resultGames.Data)
+                foreach (GameViewModel item in resultGames.data)
                 {
                     int idGame = int.Parse(item.Id);
 
                     var callback = RestService.For<IClipInterface>("https://api.twitch.tv/", new RefitSettings()
                     {
-                        AuthorizationHeaderValueGetter = () => Task.FromResult(tokenViewModel.AccessToken)
+                        AuthorizationHeaderValueGetter = () => Task.FromResult(tokenViewModel.access_token)
                     });
 
                     var result = callback.GetClips(idGame, _conexao.ClientId).Result;
 
-                    listaRetorno = listaRetorno.AsEnumerable().Union(result.Data.AsEnumerable()).ToList();
+                    listaRetorno = listaRetorno.AsEnumerable().Union(result.data.AsEnumerable()).ToList();
                 }
 
                 //ToDo: Melhorar performance colocando as requisções em um banco e buscando dele mesmo.
@@ -61,7 +61,7 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+               throw ex;
             }
         }
     }

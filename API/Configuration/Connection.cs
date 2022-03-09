@@ -8,8 +8,8 @@ namespace API.Configuration
 {
     public class Connection
     {
-        public string ClientId { get {return "Client_Id";} }
-        private string ClientSecret { get {return "Client_Secret";} }
+        public string ClientId { get {return ""; } }
+        private string ClientSecret { get {return ""; } }
         private string GrantType { get {return "client_credentials";} }
 
         public async Task<TokenViewModel> GetToken()

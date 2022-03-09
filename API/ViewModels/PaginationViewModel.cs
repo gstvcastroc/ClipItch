@@ -2,6 +2,6 @@ namespace API.ViewModels
 {
     public class PaginationViewModel
     {
-        public string Cursor { get; set; }
+        public string cursor { get; set; }
     }
 }

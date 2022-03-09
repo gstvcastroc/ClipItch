@@ -32,12 +32,12 @@ namespace API.Controllers
 
                 var callback = RestService.For<IGameInterface>("https://api.twitch.tv/", new RefitSettings()
                 {
-                    AuthorizationHeaderValueGetter = () => Task.FromResult(tokenViewModel.AccessToken)
+                    AuthorizationHeaderValueGetter = () => Task.FromResult(tokenViewModel.access_token)
                 });
 
                 var result = callback.GetTopGames(_conexao.ClientId).Result;
 
-                List<GameViewModel> gamesList = result.Data;
+                List<GameViewModel> gamesList = result.data;
 
                 return Ok(gamesList);
             }
