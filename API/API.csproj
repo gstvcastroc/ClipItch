@@ -9,7 +9,6 @@
 	  <None Remove="Data\Mappings\**" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Compile Remove="Controllers\ClipsController.cs" />
 	  <Compile Remove="Data\DataContext.cs" />
 	</ItemGroup>
 	<ItemGroup>
