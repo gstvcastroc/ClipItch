@@ -1,6 +1,4 @@
 using API.Models;
-using API.ViewModels.Clips;
-using API.ViewModels.Games;
 using AutoMapper;
 
 namespace API.Configuration
@@ -14,8 +12,8 @@ namespace API.Configuration
 
     private void MapModelToViewModel()
     {
-      CreateMap<Clip, ClipsViewModel>().ReverseMap();
-      CreateMap<Game, GameViewModel>().ReverseMap();
+      CreateMap<Clip, Clip>().ReverseMap();
+      CreateMap<Game, Game>().ReverseMap();
     }
   }
 }

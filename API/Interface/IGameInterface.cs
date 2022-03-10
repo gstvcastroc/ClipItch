@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using API.ViewModels.Games;
+using API.Models;
 using Refit;
 
 namespace API.Interface
@@ -8,6 +8,6 @@ namespace API.Interface
     {
         [Get("/helix/games/top")]
         [Headers("Authorization: Bearer")]
-        Task<GamesRootViewModel> GetTopGames([Header("Client-Id")] string client_id);         
+        Task<TopGames> GetTopGames([Header("Client-Id")] string client_id);         
     }
 }

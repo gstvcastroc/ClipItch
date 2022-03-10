@@ -1,6 +1,4 @@
-﻿using API.Data.Mappings;
-using API.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace API.Data

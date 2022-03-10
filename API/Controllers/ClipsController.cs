@@ -32,24 +32,24 @@ namespace API.Controllers
         {
             try
             {
-                TokenViewModel tokenViewModel = await _conexao.GetToken();
+                Token tokenViewModel = await _conexao.GetToken();
 
                 var callbackGames = RestService.For<IGameInterface>("https://api.twitch.tv/", new RefitSettings()
                 {
-                    AuthorizationHeaderValueGetter = () => Task.FromResult(tokenViewModel.access_token)
+                    AuthorizationHeaderValueGetter = () => Task.FromResult(tokenViewModel.AccessToken)
                 });
 
                 var resultGames = callbackGames.GetTopGames(_conexao.ClientId).Result;
 
-                List<ClipsViewModel> listaRetorno = new List<ClipsViewModel>();
+                List<Clip> listaRetorno = new List<Clip>();
 
-                foreach (GameViewModel item in resultGames.data)
+                foreach (Game item in resultGames.data)
                 {
-                    int idGame = int.Parse(item.id);
+                    int idGame = int.Parse(item.Id);
 
                     var callback = RestService.For<IClipInterface>("https://api.twitch.tv/", new RefitSettings()
                     {
-                        AuthorizationHeaderValueGetter = () => Task.FromResult(tokenViewModel.access_token)
+                        AuthorizationHeaderValueGetter = () => Task.FromResult(tokenViewModel.AccessToken)
                     });
 
                     var result = callback.GetClips(idGame, _conexao.ClientId).Result;
