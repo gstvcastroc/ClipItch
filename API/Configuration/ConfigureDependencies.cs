@@ -15,16 +15,11 @@ namespace API.Configuration
       // Adição do Refit
       var baseUrl = configuration["TwitchAPI"].ToString();
 
-      services.AddRefitClient<IGameInterface>()
+      services.AddRefitClient<IGamesInterface>()
       .ConfigureHttpClient(options => options.BaseAddress = new Uri(baseUrl));
 
-      services.AddRefitClient<IClipInterface>()
+      services.AddRefitClient<IClipsInterface>()
       .ConfigureHttpClient(options => options.BaseAddress = new Uri(baseUrl));
-
-      // Adição do Automapper aos serviços da aplicação
-      services.AddSingleton(new AutoMapperConfig());
-      services.AddAutoMapper(typeof(Startup));
-      services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
       // Adição do serviço de banco de dados
       services.AddDbContext<DataContext>();

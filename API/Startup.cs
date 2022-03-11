@@ -1,12 +1,12 @@
 using System;
 using API.Configuration;
+using API.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Newtonsoft.Json;
 
 namespace API
 {
@@ -22,6 +22,10 @@ namespace API
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddControllers();
+
+      services.AddSingleton<IGamesService, GamesService>();
+      services.AddSingleton<IClipsService, ClipsService>();
+      services.AddSingleton<IAuthentication, Authentication>();
 
       services.AddSwaggerGen(c =>
       {
@@ -42,9 +46,6 @@ namespace API
           }
         });
       });
-
-      services.AddControllers()
-        .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
       services.ResolveDependencies(Configuration);
     }

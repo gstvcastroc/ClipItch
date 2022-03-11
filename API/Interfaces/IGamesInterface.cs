@@ -4,7 +4,7 @@ using Refit;
 
 namespace API.Interfaces
 {
-    public interface IGameInterface
+    public interface IGamesInterface
     {
         [Get("/helix/games/top")]
         [Headers("Authorization: Bearer")]

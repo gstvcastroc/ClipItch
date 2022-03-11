@@ -4,7 +4,7 @@ using Refit;
 
 namespace API.Interfaces
 {
-    public interface IClipInterface
+    public interface IClipsInterface
     {
         [Get("/helix/clips?game_id={id}")]
         [Headers("Authorization: Bearer")]
