@@ -1,12 +1,12 @@
 using API.Models;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace API.Configuration
 {
-  public class Connection
+  public class Authentication
   {
     // Propriedade que representa o client ID da API do Twitch.
     public string ClientId { get; } = "kgl6s2v5suh14svu58vdbdzpazxc0j";
@@ -32,7 +32,7 @@ namespace API.Configuration
 
       var responseString = await response.Content.ReadAsStringAsync();
 
-      var result = JsonConvert.DeserializeObject<Token>(responseString);
+      var result = JsonSerializer.Deserialize<Token>(responseString);
 
       return result;
     }

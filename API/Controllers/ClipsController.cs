@@ -1,5 +1,6 @@
 using API.Configuration;
-using API.Interface;
+using API.Data;
+using API.Interfaces;
 using API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Refit;
@@ -16,13 +17,15 @@ namespace API.Controllers
   {
     private readonly IClipInterface _clipInterface;
     private readonly IGameInterface _gameInterface;
-    private readonly Connection _conexao;
+    private readonly Authentication _conexao;
+    private readonly DataContext _context;
 
-    public ClipsController(IClipInterface clipeInterface, IGameInterface gameInterface)
+    public ClipsController(DataContext context, IClipInterface clipeInterface, IGameInterface gameInterface)
     {
       _clipInterface = clipeInterface;
       _gameInterface = gameInterface;
-      _conexao = new Connection();
+      _conexao = new Authentication();
+      _context = context;
     }
 
     [HttpGet("obterTodos")]
@@ -56,6 +59,9 @@ namespace API.Controllers
 
           //listaRetorno.AsEnumerable().Union(result.Data.AsEnumerable()).ToList();
         }
+
+        //_context.AddRange(listaRetorno);
+        //_context.SaveChanges();
 
         return Ok(listaRetorno);
       }

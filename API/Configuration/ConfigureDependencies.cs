@@ -1,4 +1,5 @@
-using API.Interface;
+using API.Data;
+using API.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,8 +27,8 @@ namespace API.Configuration
       services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
       // Adição do serviço de banco de dados
-      //services.AddDbContext<DataContext>();
-      //services.AddSingleton<DataContext, DataContext>();
+      services.AddDbContext<DataContext>();
+      services.AddSingleton<DataContext, DataContext>();
 
       return services;
     }

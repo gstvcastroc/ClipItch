@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using API.Models;
 using Refit;
 
-namespace API.Interface
+namespace API.Interfaces
 {
     public interface IClipInterface
     {

@@ -16,65 +16,79 @@ namespace API.Data.Mappings
 
       // Propriedades
       builder.Property(x => x.Id)
-       .HasColumnName("Id")
-       .HasColumnType("INTEGER")
-       .HasMaxLength(32);
+       .HasColumnName("id")
+       .HasColumnType("TEXT")
+       .HasMaxLength(120);
+
+      builder.Property(x => x.Url)
+      .HasColumnName("url")
+      .HasColumnType("TEXT")
+      .HasMaxLength(120);
 
       builder.Property(x => x.EmbedUrl)
-        .HasColumnName("EmbedUrl")
+        .HasColumnName("embed_url")
         .HasColumnType("TEXT")
         .HasMaxLength(120);
 
-      builder.Property(x => x.EmbedHtml)
-        .HasColumnName("EmbedHtml")
+      builder.Property(x => x.BroadcasterId)
+        .HasColumnName("broadcaster_id")
         .HasColumnType("TEXT")
         .HasMaxLength(120);
 
-      builder.Property(x => x.Game)
-        .HasColumnName("Game")
+      builder.Property(x => x.BroadcasterName)
+        .HasColumnName("broadcaster_name")
+        .HasColumnType("TEXT")
+        .HasMaxLength(120);
+
+      builder.Property(x => x.CreatorId)
+        .HasColumnName("creator_id")
+        .HasColumnType("TEXT")
+        .HasMaxLength(120);
+
+      builder.Property(x => x.CreatorName)
+        .HasColumnName("creator_name")
+        .HasColumnType("TEXT")
+        .HasMaxLength(120);
+
+      builder.Property(x => x.VideoId)
+        .HasColumnName("video_id")
+        .HasColumnType("TEXT")
+        .HasMaxLength(120);
+
+      builder.Property(x => x.GameId)
+        .HasColumnName("game_id")
         .HasColumnType("TEXT")
         .HasMaxLength(120);
 
       builder.Property(x => x.Language)
-        .HasColumnName("Language")
+        .HasColumnName("language")
         .HasColumnType("TEXT")
         .HasMaxLength(120);
 
-      builder.Property(x => x.Views)
-        .HasColumnName("Views")
-        .HasColumnType("INTEGER")
-        .HasMaxLength(32);
+      builder.Property(x => x.Title)
+        .HasColumnName("title")
+        .HasColumnType("TEXT")
+        .HasMaxLength(120);
 
-      builder.Property(x => x.Duration)
-        .HasColumnName("Duration")
-        .HasColumnType("REAL")
-        .HasMaxLength(32);
+      builder.Property(x => x.ViewCount)
+        .HasColumnName("view_count")
+        .HasColumnType("INTEGER")
+        .HasMaxLength(120);
 
       builder.Property(x => x.CreatedAt)
-        .HasColumnName("Created_at")
+        .HasColumnName("created_at")
         .HasColumnType("TEXT")
         .HasMaxLength(120);
 
-      // Relacionamentos
-      builder
-        .HasOne(x => x.Broadcaster)
-        .WithMany(x => x.Clips)
-        .HasForeignKey(x => x.BroadcasterId);
+      builder.Property(x => x.ThumbnailUrl)
+        .HasColumnName("thumbnail_url")
+        .HasColumnType("TEXT")
+        .HasMaxLength(120);
 
-      builder
-        .HasOne(x => x.Curator)
-        .WithMany(x => x.Clips)
-        .HasForeignKey(x => x.CuratorId);
-
-      builder
-        .HasOne(x => x.Vod)
-        .WithOne(x => x.Clip)
-        .HasForeignKey<Vod>(x => x.Id);
-
-      builder
-        .HasOne(x => x.Thumbnail)
-        .WithOne(x => x.Clip)
-        .HasForeignKey<Thumbnail>(x => x.Id);
+      builder.Property(x => x.Duration)
+        .HasColumnName("duration")
+        .HasColumnType("REAL")
+        .HasMaxLength(120);
     }
   }
 }

@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.Configuration;
-using API.Interface;
+using API.Data;
+using API.Interfaces;
 using API.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -15,15 +16,15 @@ namespace API.Controllers
   public class GameController : ControllerBase
   {
     private readonly IGameInterface _gameInterface;
-    private readonly Connection _conexao;
-    //private readonly DataContext _context;
+    private readonly Authentication _conexao;
+    private readonly DataContext _context;
     private readonly IMapper _mapper;
 
-    public GameController(IGameInterface gameInterface, /*DataContext context, */ IMapper mapper)
+    public GameController(IGameInterface gameInterface, DataContext context, IMapper mapper)
     {
       _gameInterface = gameInterface;
-      _conexao = new Connection();
-      //_context = context;
+      _conexao = new Authentication();
+      _context = context;
       _mapper = mapper;
     }
 
@@ -42,6 +43,9 @@ namespace API.Controllers
         var result = callback.GetTopGames(_conexao.ClientId).Result;
 
         List<Game> gamesList = result.Data;
+
+        //_context.AddRange(gamesList);
+        //_context.SaveChanges();
 
         return Ok(gamesList);
       }

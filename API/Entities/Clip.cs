@@ -1,53 +1,54 @@
 using Newtonsoft.Json;
 using System;
+using System.Text.Json.Serialization;
 
 namespace API.Models
 {
   public class Clip
   {
-    [JsonProperty("id")]
+    [JsonPropertyName("id")]
     public string Id { get; set; }
 
-    [JsonProperty("url")]
+    [JsonPropertyName("url")]
     public string Url { get; set; }
 
-    [JsonProperty("embed_url")]
+    [JsonPropertyName("embed_url")]
     public string EmbedUrl { get; set; }
 
-    [JsonProperty("broadcaster_id")]
+    [JsonPropertyName("broadcaster_id")]
     public string BroadcasterId { get; set; }
 
-    [JsonProperty("broadcaster_name")]
+    [JsonPropertyName("broadcaster_name")]
     public string BroadcasterName { get; set; }
 
-    [JsonProperty("creator_id")]
+    [JsonPropertyName("creator_id")]
     public string CreatorId { get; set; }
 
-    [JsonProperty("creator_name")]
+    [JsonPropertyName("creator_name")]
     public string CreatorName { get; set; }
 
-    [JsonProperty("video_id")]
+    [JsonPropertyName("video_id")]
     public string VideoId { get; set; }
 
-    [JsonProperty("game_id")]
+    [JsonPropertyName("game_id")]
     public string GameId { get; set; }
 
-    [JsonProperty("language")]
+    [JsonPropertyName("language")]
     public string Language { get; set; }
 
-    [JsonProperty("title")]
+    [JsonPropertyName("title")]
     public string Title { get; set; }
 
-    [JsonProperty("view_count")]
+    [JsonPropertyName("view_count")]
     public int ViewCount { get; set; }
 
-    [JsonProperty("created_at")]
+    [JsonPropertyName("created_at")]
     public DateTime CreatedAt { get; set; }
 
-    [JsonProperty("thumbnail_url")]
+    [JsonPropertyName("thumbnail_url")]
     public string ThumbnailUrl { get; set; }
 
-    [JsonProperty("duration")]
+    [JsonPropertyName("duration")]
     public double Duration { get; set; }
   }
 }

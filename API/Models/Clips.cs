@@ -1,14 +1,15 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace API.Models
 {
   public class Clips
   {
-    [JsonProperty("data")]
+    [JsonPropertyName("data")]
     public List<Clip> Data { get; set; }
 
-    [JsonProperty("pagination")]
+    [JsonPropertyName("pagination")]
     public Pagination Pagination { get; set; }
   }
 }
