@@ -2,6 +2,7 @@
 using API.Data;
 using API.Interfaces;
 using API.Models;
+using Microsoft.EntityFrameworkCore;
 using Refit;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -48,6 +49,21 @@ namespace API.Services
       }
 
       return clipsList;
+    }
+
+    public async Task AddClipsToDatabase(List<Clip> clipsList)
+    {
+      foreach (var entry in clipsList)
+      {
+        var clip = await _context.Clips
+          .AsNoTracking()
+          .FirstOrDefaultAsync(x => x.Id == entry.Id);
+
+        if (clip is not null) return;
+
+        _context.Clips.Add(entry);
+        await _context.SaveChangesAsync();
+      }
     }
   }
 }

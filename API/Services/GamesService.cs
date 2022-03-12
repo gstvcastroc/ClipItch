@@ -2,6 +2,7 @@
 using API.Data;
 using API.Interfaces;
 using API.Models;
+using Microsoft.EntityFrameworkCore;
 using Refit;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -33,6 +34,21 @@ namespace API.Services
       var gamesList = result.Data;
 
       return gamesList;
+    }
+
+    public async Task AddGamesToDatabase(List<Game> gameList)
+    {
+      foreach (var entry in gameList)
+      {
+        var game = await _context.Games
+          .AsNoTracking()
+          .FirstOrDefaultAsync(x => x.Id == entry.Id);
+
+        if (game is not null) return;
+
+        _context.Games.Add(entry);
+        await _context.SaveChangesAsync();
+      }
     }
   }
 }

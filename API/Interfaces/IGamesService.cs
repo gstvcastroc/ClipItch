@@ -7,5 +7,6 @@ namespace API.Services
   public interface IGamesService
   {
     Task<List<Game>> GetTopGamesAsync();
+    Task AddGamesToDatabase(List<Game> gameList);
   }
 }

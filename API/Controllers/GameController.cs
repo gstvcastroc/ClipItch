@@ -18,9 +18,7 @@ namespace API.Controllers
     [HttpGet("topgames")]
     public async Task<IActionResult> GetTopGamesRequest()
     {
-      var gamesList = await _gamesService.GetTopGamesAsync();
-
-      return Ok(gamesList);
+      return Ok();
     }
   }
 }

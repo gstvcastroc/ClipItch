@@ -18,9 +18,7 @@ namespace API.Controllers
     [HttpGet("clips")]
     public async Task<IActionResult> GetClipsRequest()
     {
-      var clipsList = await _clipsService.GetClipsAsync();
-
-      return Ok(clipsList);
+      return Ok();
     }
   }
 }

@@ -1,6 +1,8 @@
 using System;
 using API.Configuration;
 using API.Services;
+using API.Workers;
+using Coravel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -27,6 +29,10 @@ namespace API
       services.AddSingleton<IClipsService, ClipsService>();
       services.AddSingleton<IAuthentication, Authentication>();
 
+      services.AddScheduler();
+      services.AddTransient<GameWorker>();
+      services.AddTransient<ClipsWorker>();
+
       services.AddSwaggerGen(c =>
       {
         c.SwaggerDoc("v1", new OpenApiInfo
@@ -51,6 +57,21 @@ namespace API
     }
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
+      var provider = app.ApplicationServices;
+      provider.UseScheduler(scheduler =>
+      {
+        scheduler
+        .Schedule<GameWorker>()
+        .Daily();
+      });
+
+      provider.UseScheduler(scheduler =>
+      {
+        scheduler
+        .Schedule<ClipsWorker>()
+        .Daily();
+      });
+
       if (env.IsDevelopment())
       {
         app.UseDeveloperExceptionPage();

@@ -7,5 +7,6 @@ namespace API.Services
   public interface IClipsService
   {
     Task<List<Clip>> GetClipsAsync();
+    Task AddClipsToDatabase(List<Clip> clipsList);
   }
 }
