@@ -37,9 +37,9 @@ namespace API
       {
         c.SwaggerDoc("v1", new OpenApiInfo
         {
-          Title = "ClipItch",
+          Title = "Clipitch",
           Version = "v1",
-          Description = "Documentação dos EndPoints do Clipitch API",
+          Description = "Documentação dos endpoints da API do Clipitch",
           Contact = new OpenApiContact
           {
             Name = "Gustavo Castro",

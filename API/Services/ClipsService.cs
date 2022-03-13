@@ -71,8 +71,8 @@ namespace API.Services
       }
     }
 
-    // Método para buscar a lista de clips no banco de dados e enviá-la em formato JSON. Lista ordenada apenas de acordo com o número de visualizações, independente das datas dos clips.
-    public async Task<string> GetClipsFromDatabaseAsync(int? quantity = null)
+    // Método para buscar a lista de clips no banco de dados e enviá-la em formato JSON. Lista ordenada apenas de acordo com o número de visualizações, independente das datas dos clips. Recebe a quantidade de clips a ser retornada como parâmetro. Caso esse parâmetro seja nulo, retorna todos os clips.
+    public async Task<string> GetClipsAsync(int? quantity = null)
     {
       var clipsList = new List<Clip>();
 
@@ -98,8 +98,8 @@ namespace API.Services
       return json;
     }
 
-    // Método para buscar a lista de uma certa quantidade de clips de um jogo em específico. Recebe o ID desse jogo e a quantidade de clips a ser buscada como parâmetros. A lista é ordenada de acordo com o número de visualizações dos clips.
-    public async Task<string> GetClipsFromDatabaseByGameIdAsync(string gameId, int? quantity = null)
+    // Método para buscar a lista de clips de um determinada jogo no banco de dados e enviá-la em formato JSON. Lista ordenada apenas de acordo com o número de visualizações, independente das datas dos clips. Recebe o ID do jogo e a quantidade de clips a ser retornada como parâmetro. Caso esse parâmetro seja nulo, retorna todos os clips do jogo.
+    public async Task<string> GetClipsByGameIdAsync(string gameId, int? quantity = null)
     {
       var clipsList = new List<Clip>();
 
@@ -127,29 +127,29 @@ namespace API.Services
       return json;
     }
 
-    public async Task<string> GetAllDailyClipsAsync(int quantity = 0)
+    // Método para buscar a lista de clips mais visualizados do dia. A lista é ordenada de acordo com o número de visualizações dos clips. Recebe a quantidade de clips a ser buscada como parâmetro. Caso esse parâmetro seja nulo, retorna todos os clips do dia.
+    public async Task<string> GetDailyClipsAsync(int? quantity = null)
     {
-      quantity = await _context.Clips.AsNoTracking().CountAsync();
+      var clipsList = new List<Clip>();
 
-      var clipsList = await _context.Clips
-        .AsNoTracking()
-        .Where(x => x.CreatedAt == DateTime.Today)
-        .OrderByDescending(x => x.ViewCount)
-        .ToListAsync();
+      if (quantity is null)
+      {
+        clipsList = await _context.Clips
+          .AsNoTracking()
+          .Where(x => x.CreatedAt == DateTime.Today)
+          .OrderByDescending(x => x.ViewCount)
+          .ToListAsync();
+      }
 
-      var json = GetJson(clipsList);
-
-      return json;
-    }
-
-    public async Task<string> GetDailyClipsAsync(int quantity)
-    {
-      var clipsList = await _context.Clips
-        .AsNoTracking()
-        .Where(x => x.CreatedAt == DateTime.Today)
-        .OrderByDescending(x => x.ViewCount)
-        .Take(quantity)
-        .ToListAsync();
+      else
+      {
+        clipsList = await _context.Clips
+          .AsNoTracking()
+          .Where(x => x.CreatedAt == DateTime.Today)
+          .OrderByDescending(x => x.ViewCount)
+          .Take(quantity.Value)
+          .ToListAsync();
+      }
 
       var json = GetJson(clipsList);
 

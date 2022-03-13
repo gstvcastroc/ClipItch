@@ -8,7 +8,8 @@ namespace API.Services
   {
     Task<List<Clip>> GetClipsFromTwitchAsync();
     Task AddClipsToDatabaseAsync(List<Clip> clipsList);
-    Task<string> GetClipsFromDatabaseAsync(int? quantity);
-    Task<string> GetClipsFromDatabaseByGameIdAsync(string gameId, int? quantity);
+    Task<string> GetClipsAsync(int? quantity);
+    Task<string> GetClipsByGameIdAsync(string gameId, int? quantity);
+    Task<string> GetDailyClipsAsync(int? quantity);
   }
 }

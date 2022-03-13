@@ -7,11 +7,11 @@ namespace API.Controllers
 {
   [Route("api/")]
   [ApiController]
-  public class GameController : ControllerBase
+  public class GamesController : ControllerBase
   {
     private readonly IGamesService _gamesService;
 
-    public GameController(IGamesService gamesService)
+    public GamesController(IGamesService gamesService)
     {
       _gamesService = gamesService;
     }

@@ -17,11 +17,11 @@ namespace API.Controllers
     }
 
     [HttpGet("clips")]
-    public async Task<IActionResult> GetAllClipsRequest()
+    public async Task<IActionResult> GetAllClips()
     {
       try
       {
-        var clipsList = await _clipsService.GetClipsFromDatabaseAsync(null);
+        var clipsList = await _clipsService.GetClipsAsync(null);
 
         if (clipsList is null) return NotFound("Lista de clips vazia.");
 
@@ -35,11 +35,11 @@ namespace API.Controllers
     }
 
     [HttpGet("clips/{quantity:int}")]
-    public async Task<IActionResult> GetClipsRequest([FromRoute] int quantity)
+    public async Task<IActionResult> GetClips([FromRoute] int quantity)
     {
       try
       {
-        var clipsList = await _clipsService.GetClipsFromDatabaseAsync(quantity);
+        var clipsList = await _clipsService.GetClipsAsync(quantity);
 
         if (clipsList is null) return NotFound("Lista de clips vazia.");
 
@@ -53,11 +53,11 @@ namespace API.Controllers
     }
 
     [HttpGet("clips/game/{id}")]
-    public async Task<IActionResult> GetAllClipsByGameIdRequest ([FromRoute] string id)
+    public async Task<IActionResult> GetAllClipsByGameId([FromRoute] string id)
     {
       try
       {
-        var clipsList = await _clipsService.GetClipsFromDatabaseByGameIdAsync(id, null);
+        var clipsList = await _clipsService.GetClipsByGameIdAsync(id, null);
 
         if (clipsList is null) return NotFound("Lista de clips vazia.");
 
@@ -71,11 +71,11 @@ namespace API.Controllers
     }
 
     [HttpGet("clips/game/{id}/{quantity:int}")]
-    public async Task<IActionResult> GetClipsByGameIdRequest([FromRoute] string id, int quantity)
+    public async Task<IActionResult> GetClipsByGameId([FromRoute] string id, int quantity)
     {
       try
       {
-        var clipsList = await _clipsService.GetClipsFromDatabaseByGameIdAsync(id, quantity);
+        var clipsList = await _clipsService.GetClipsByGameIdAsync(id, quantity);
 
         if (clipsList is null) return NotFound("Lista de clips vazia.");
 
@@ -88,5 +88,40 @@ namespace API.Controllers
       }
     }
 
+    [HttpGet("clips/daily")]
+    public async Task<IActionResult> GetDailyClips()
+    {
+      try
+      {
+        var clipsList = await _clipsService.GetDailyClipsAsync(null);
+
+        if (clipsList is null) return NotFound("Lista de clips vazia.");
+
+        return Ok(clipsList);
+      }
+
+      catch (Exception)
+      {
+        return BadRequest("Erro na requisição.");
+      }
+    }
+
+    [HttpGet("clips/daily/{quantity:int}")]
+    public async Task<IActionResult> GetDailyClips([FromRoute] int quantity)
+    {
+      try
+      {
+        var clipsList = await _clipsService.GetDailyClipsAsync(quantity);
+
+        if (clipsList is null) return NotFound("Lista de clips vazia.");
+
+        return Ok(clipsList);
+      }
+
+      catch (Exception)
+      {
+        return BadRequest("Erro na requisição.");
+      }
+    }
   }
 }
