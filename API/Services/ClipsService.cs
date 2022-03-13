@@ -156,6 +156,34 @@ namespace API.Services
       return json;
     }
 
+    public async Task<string> GetWeeklyClipsAsync(int? quantity = null)
+    {
+      var clipsList = new List<Clip>();
+
+      if (quantity is null)
+      {
+        clipsList = await _context.Clips
+          .AsNoTracking()
+          .Where(x => x.CreatedAt.Date >= DateTime.Today.AddDays(-7))
+          .OrderByDescending(x => x.ViewCount)
+          .ToListAsync();
+      }
+
+      else
+      {
+        clipsList = await _context.Clips
+          .AsNoTracking()
+          .Where(x => x.CreatedAt.Date >= DateTime.Today.AddDays(-7))
+          .OrderByDescending(x => x.ViewCount)
+          .Take(quantity.Value)
+          .ToListAsync();
+      }
+
+      var json = GetJson(clipsList);
+
+      return json;
+    }
+
     private static string GetJson(List<Clip> clipsList)
     {
       var options = new JsonSerializerOptions { WriteIndented = true };

@@ -123,5 +123,41 @@ namespace API.Controllers
         return BadRequest("Erro na requisição.");
       }
     }
+
+    [HttpGet("clips/weekly")]
+    public async Task<IActionResult> GetAllWeeklyClips()
+    {
+      try
+      {
+        var clipsList = await _clipsService.GetWeeklyClipsAsync(null);
+
+        if (clipsList is null) return NotFound("Lista de clips vazia.");
+
+        return Ok(clipsList);
+      }
+
+      catch (Exception)
+      {
+        return BadRequest("Erro na requisição.");
+      }
+    }
+
+    [HttpGet("clips/weekly/{quantity:int}")]
+    public async Task<IActionResult> GetWeeklyClips([FromRoute] int quantity)
+    {
+      try
+      {
+        var clipsList = await _clipsService.GetWeeklyClipsAsync(quantity);
+
+        if (clipsList is null) return NotFound("Lista de clips vazia.");
+
+        return Ok(clipsList);
+      }
+
+      catch (Exception)
+      {
+        return BadRequest("Erro na requisição.");
+      }
+    }
   }
 }
