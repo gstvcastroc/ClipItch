@@ -1,5 +1,6 @@
 using API.Services;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace API.Controllers
@@ -18,7 +19,19 @@ namespace API.Controllers
     [HttpGet("topgames")]
     public async Task<IActionResult> GetTopGamesRequest()
     {
-      return Ok();
+      try
+      {
+        var gamesList = await _gamesService.GetGamesFromDatabaseAsync();
+
+        if (gamesList is null) return NotFound("Lista de jogos vazia.");
+
+        return Ok(gamesList);
+      }
+
+      catch (Exception)
+      {
+        return BadRequest("Erro na requisição.");
+      }
     }
   }
 }

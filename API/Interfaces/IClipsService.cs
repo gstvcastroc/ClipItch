@@ -6,7 +6,9 @@ namespace API.Services
 {
   public interface IClipsService
   {
-    Task<List<Clip>> GetClipsAsync();
-    Task AddClipsToDatabase(List<Clip> clipsList);
+    Task<List<Clip>> GetClipsFromTwitchAsync();
+    Task AddClipsToDatabaseAsync(List<Clip> clipsList);
+    Task<string> GetClipsFromDatabaseAsync(int? quantity);
+    Task<string> GetClipsFromDatabaseByGameIdAsync(string gameId, int? quantity);
   }
 }

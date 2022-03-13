@@ -5,6 +5,7 @@ using API.Models;
 using Microsoft.EntityFrameworkCore;
 using Refit;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace API.Services
@@ -20,7 +21,8 @@ namespace API.Services
       _authentication = authentication;
     }
 
-    public async Task<List<Game>> GetTopGamesAsync()
+    // Método para buscar jogos da API do Twitch.
+    public async Task<List<Game>> GetGamesFromTwitchAsync()
     {
       var token = await _authentication.GetToken();
 
@@ -36,7 +38,8 @@ namespace API.Services
       return gamesList;
     }
 
-    public async Task AddGamesToDatabase(List<Game> gameList)
+    // Método para adicionar a lista de jogos no banco de dados.
+    public async Task AddGamesToDatabaseAsync(List<Game> gameList)
     {
       foreach (var entry in gameList)
       {
@@ -49,6 +52,18 @@ namespace API.Services
         _context.Games.Add(entry);
         await _context.SaveChangesAsync();
       }
+    }
+
+    // Método para buscar a lista de jogos no banco de dados e enviá-la em formato JSON.
+    public async Task<string> GetGamesFromDatabaseAsync()
+    {
+      var gamesList = await _context.Games.AsNoTracking().ToListAsync();
+
+      var options = new JsonSerializerOptions { WriteIndented = true };
+
+      var json = JsonSerializer.Serialize(gamesList, options);
+
+      return json;
     }
   }
 }

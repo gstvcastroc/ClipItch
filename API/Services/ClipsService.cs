@@ -4,7 +4,10 @@ using API.Interfaces;
 using API.Models;
 using Microsoft.EntityFrameworkCore;
 using Refit;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace API.Services
@@ -25,11 +28,12 @@ namespace API.Services
       _context = context;
     }
 
-    public async Task<List<Clip>> GetClipsAsync()
+    // Método para buscar clips da API do Twitch.
+    public async Task<List<Clip>> GetClipsFromTwitchAsync()
     {
       var token = await _authentication.GetToken();
 
-      var gamesList = await _gamesService.GetTopGamesAsync();
+      var gamesList = await _gamesService.GetGamesFromTwitchAsync();
 
       var clipsList = new List<Clip>();
 
@@ -51,7 +55,8 @@ namespace API.Services
       return clipsList;
     }
 
-    public async Task AddClipsToDatabase(List<Clip> clipsList)
+    // Método para adicionar a lista de clips no banco de dados.
+    public async Task AddClipsToDatabaseAsync(List<Clip> clipsList)
     {
       foreach (var entry in clipsList)
       {
@@ -64,6 +69,100 @@ namespace API.Services
         _context.Clips.Add(entry);
         await _context.SaveChangesAsync();
       }
+    }
+
+    // Método para buscar a lista de clips no banco de dados e enviá-la em formato JSON. Lista ordenada apenas de acordo com o número de visualizações, independente das datas dos clips.
+    public async Task<string> GetClipsFromDatabaseAsync(int? quantity = null)
+    {
+      var clipsList = new List<Clip>();
+
+      if (quantity is null)
+      {
+        clipsList = await _context.Clips
+          .AsNoTracking()
+          .OrderByDescending(x => x.ViewCount)
+          .ToListAsync();
+      }
+
+      else
+      {
+        clipsList = await _context.Clips
+          .AsNoTracking()
+          .OrderByDescending(x => x.ViewCount)
+          .Take(quantity.Value)
+          .ToListAsync();
+      }
+
+      var json = GetJson(clipsList);
+
+      return json;
+    }
+
+    // Método para buscar a lista de uma certa quantidade de clips de um jogo em específico. Recebe o ID desse jogo e a quantidade de clips a ser buscada como parâmetros. A lista é ordenada de acordo com o número de visualizações dos clips.
+    public async Task<string> GetClipsFromDatabaseByGameIdAsync(string gameId, int? quantity = null)
+    {
+      var clipsList = new List<Clip>();
+
+      if (quantity is null)
+      {
+        clipsList = await _context.Clips
+          .AsNoTracking()
+          .Where(x => x.GameId == gameId)
+          .OrderByDescending(x => x.ViewCount)
+          .ToListAsync();
+      }
+
+      else
+      {
+        clipsList = await _context.Clips
+          .AsNoTracking()
+          .Where(x => x.GameId == gameId)
+          .OrderByDescending(x => x.ViewCount)
+          .Take(quantity.Value)
+          .ToListAsync();
+      }
+
+      var json = GetJson(clipsList);
+
+      return json;
+    }
+
+    public async Task<string> GetAllDailyClipsAsync(int quantity = 0)
+    {
+      quantity = await _context.Clips.AsNoTracking().CountAsync();
+
+      var clipsList = await _context.Clips
+        .AsNoTracking()
+        .Where(x => x.CreatedAt == DateTime.Today)
+        .OrderByDescending(x => x.ViewCount)
+        .ToListAsync();
+
+      var json = GetJson(clipsList);
+
+      return json;
+    }
+
+    public async Task<string> GetDailyClipsAsync(int quantity)
+    {
+      var clipsList = await _context.Clips
+        .AsNoTracking()
+        .Where(x => x.CreatedAt == DateTime.Today)
+        .OrderByDescending(x => x.ViewCount)
+        .Take(quantity)
+        .ToListAsync();
+
+      var json = GetJson(clipsList);
+
+      return json;
+    }
+
+    private static string GetJson(List<Clip> clipsList)
+    {
+      var options = new JsonSerializerOptions { WriteIndented = true };
+
+      var json = JsonSerializer.Serialize(clipsList, options);
+
+      return json;
     }
   }
 }

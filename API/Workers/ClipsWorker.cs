@@ -16,9 +16,9 @@ namespace API.Workers
 
     public async Task Invoke()
     {
-      var clipsList = await _clipsService.GetClipsAsync();
+      var clipsList = await _clipsService.GetClipsFromTwitchAsync();
 
-      await _clipsService.AddClipsToDatabase(clipsList);
+      await _clipsService.AddClipsToDatabaseAsync(clipsList);
     }
   }
 }

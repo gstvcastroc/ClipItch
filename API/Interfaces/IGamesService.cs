@@ -6,7 +6,8 @@ namespace API.Services
 {
   public interface IGamesService
   {
-    Task<List<Game>> GetTopGamesAsync();
-    Task AddGamesToDatabase(List<Game> gameList);
+    Task<List<Game>> GetGamesFromTwitchAsync();
+    Task AddGamesToDatabaseAsync(List<Game> gameList);
+    Task<string> GetGamesFromDatabaseAsync();
   }
 }

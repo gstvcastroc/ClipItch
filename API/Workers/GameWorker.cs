@@ -17,9 +17,9 @@ namespace API.Workers
 
     public async Task Invoke()
     {
-      var gamesList = await _gamesService.GetTopGamesAsync();
+      var gamesList = await _gamesService.GetGamesFromTwitchAsync();
 
-      await _gamesService.AddGamesToDatabase(gamesList);
+      await _gamesService.AddGamesToDatabaseAsync(gamesList);
     }
   }
 }
