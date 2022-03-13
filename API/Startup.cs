@@ -1,5 +1,6 @@
 using System;
 using API.Configuration;
+using API.Interfaces;
 using API.Services;
 using API.Workers;
 using Coravel;
@@ -27,6 +28,7 @@ namespace API
 
       services.AddSingleton<IGamesService, GamesService>();
       services.AddSingleton<IClipsService, ClipsService>();
+      services.AddSingleton<ISearchService, SearchService>();
       services.AddSingleton<IAuthentication, Authentication>();
 
       services.AddScheduler();

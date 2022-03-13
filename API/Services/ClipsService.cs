@@ -1,7 +1,6 @@
-﻿using API.Configuration;
-using API.Data;
+﻿using API.Data;
+using API.Entities;
 using API.Interfaces;
-using API.Models;
 using Microsoft.EntityFrameworkCore;
 using Refit;
 using System;
@@ -156,6 +155,7 @@ namespace API.Services
       return json;
     }
 
+    // Método para buscar a lista de clips mais visualizados da semana. A lista é ordenada de acordo com o número de visualizações dos clips. Recebe a quantidade de clips a ser buscada como parâmetro. Caso esse parâmetro seja nulo, retorna todos os clips do dia.
     public async Task<string> GetWeeklyClipsAsync(int? quantity = null)
     {
       var clipsList = new List<Clip>();

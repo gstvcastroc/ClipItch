@@ -1,4 +1,4 @@
-using API.Services;
+using API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -21,7 +21,7 @@ namespace API.Controllers
     {
       try
       {
-        var gamesList = await _gamesService.GetGamesFromDatabaseAsync();
+        var gamesList = await _gamesService.GetGamesAsync();
 
         if (gamesList is null) return NotFound("Lista de jogos vazia.");
 

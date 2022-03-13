@@ -1,8 +1,7 @@
-using Newtonsoft.Json;
 using System;
 using System.Text.Json.Serialization;
 
-namespace API.Models
+namespace API.Entities
 {
   public class Clip
   {

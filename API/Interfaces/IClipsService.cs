@@ -1,8 +1,8 @@
-﻿using API.Models;
+﻿using API.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace API.Services
+namespace API.Interfaces
 {
   public interface IClipsService
   {

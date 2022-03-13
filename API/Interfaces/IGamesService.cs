@@ -1,13 +1,13 @@
-﻿using API.Models;
+﻿using API.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace API.Services
+namespace API.Interfaces
 {
   public interface IGamesService
   {
     Task<List<Game>> GetGamesFromTwitchAsync();
     Task AddGamesToDatabaseAsync(List<Game> gameList);
-    Task<string> GetGamesFromDatabaseAsync();
+    Task<string> GetGamesAsync();
   }
 }

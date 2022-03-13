@@ -1,7 +1,6 @@
-﻿using API.Configuration;
-using API.Data;
+﻿using API.Data;
+using API.Entities;
 using API.Interfaces;
-using API.Models;
 using Microsoft.EntityFrameworkCore;
 using Refit;
 using System.Collections.Generic;
@@ -55,10 +54,17 @@ namespace API.Services
     }
 
     // Método para buscar a lista de jogos no banco de dados e enviá-la em formato JSON.
-    public async Task<string> GetGamesFromDatabaseAsync()
+    public async Task<string> GetGamesAsync()
     {
       var gamesList = await _context.Games.AsNoTracking().ToListAsync();
 
+      var json = GetJson(gamesList);
+
+      return json;
+    }
+
+    private static string GetJson(List<Game> gamesList)
+    {
       var options = new JsonSerializerOptions { WriteIndented = true };
 
       var json = JsonSerializer.Serialize(gamesList, options);

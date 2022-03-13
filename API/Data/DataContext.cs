@@ -1,5 +1,5 @@
 ﻿using API.Data.Mappings;
-using API.Models;
+using API.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 

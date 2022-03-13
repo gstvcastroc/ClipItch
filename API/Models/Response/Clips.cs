@@ -1,8 +1,8 @@
-using Newtonsoft.Json;
+using API.Entities;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace API.Models
+namespace API.Models.Response
 {
   public class Clips
   {

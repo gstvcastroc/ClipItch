@@ -1,7 +1,7 @@
 ﻿using API.Models;
 using System.Threading.Tasks;
 
-namespace API.Configuration
+namespace API.Interfaces
 {
   public interface IAuthentication
   {
