@@ -89,7 +89,7 @@ namespace API.Controllers
     }
 
     [HttpGet("clips/daily")]
-    public async Task<IActionResult> GetDailyClips()
+    public async Task<IActionResult> GetAllDailyClips()
     {
       try
       {
