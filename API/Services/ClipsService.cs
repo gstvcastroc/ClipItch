@@ -57,13 +57,17 @@ namespace API.Services
     // Método para adicionar a lista de clips no banco de dados.
     public async Task AddClipsToDatabaseAsync(List<Clip> clipsList)
     {
+
       foreach (var entry in clipsList)
       {
         var clip = await _context.Clips
           .AsNoTracking()
           .FirstOrDefaultAsync(x => x.Id == entry.Id);
 
-        if (clip is not null) return;
+        if (clip is not null) continue;
+
+        // Adiciona o nome do jogo ao clip.
+        entry.GameName = await GetGameName(entry.GameId);
 
         _context.Clips.Add(entry);
         await _context.SaveChangesAsync();
@@ -184,7 +188,16 @@ namespace API.Services
       return json;
     }
 
-    private static string GetJson(List<Clip> clipsList)
+    private async Task<string> GetGameName(string gameId)
+    {
+      var game = await _context.Games
+        .AsNoTracking()
+        .FirstOrDefaultAsync(game => game.Id == gameId);
+
+      return game.Name;
+    }
+
+    public static string GetJson(List<Clip> clipsList)
     {
       var options = new JsonSerializerOptions { WriteIndented = true };
 
@@ -192,5 +205,6 @@ namespace API.Services
 
       return json;
     }
+
   }
 }
