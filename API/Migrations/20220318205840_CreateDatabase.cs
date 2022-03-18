@@ -20,6 +20,7 @@ namespace API.Migrations
                     creator_name = table.Column<string>(type: "TEXT", maxLength: 120, nullable: true),
                     video_id = table.Column<string>(type: "TEXT", maxLength: 120, nullable: true),
                     game_id = table.Column<string>(type: "TEXT", maxLength: 120, nullable: true),
+                    game_name = table.Column<string>(type: "TEXT", maxLength: 120, nullable: true),
                     language = table.Column<string>(type: "TEXT", maxLength: 120, nullable: true),
                     title = table.Column<string>(type: "TEXT", maxLength: 120, nullable: true),
                     view_count = table.Column<int>(type: "INTEGER", maxLength: 120, nullable: false),
