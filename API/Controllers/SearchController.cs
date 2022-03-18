@@ -1,9 +1,11 @@
 ﻿using API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-  [Route("api/")]
+  [Route("api/[controller]")]
   [ApiController]
   public class SearchController : Controller
   {
@@ -14,7 +16,20 @@ namespace API.Controllers
       _searchService = searchService;
     }
 
+    [HttpPost("clips/{input}")]
+    public async Task<IActionResult> SearchClips([FromRoute] string input)
+    {
+      try
+      {
+        var clipsList = await _searchService.SearchClipsAsync(input);
 
+        return Ok(clipsList);
+      }
 
+      catch (Exception)
+      {
+        return BadRequest("Nenhum clip encontrado.");
+      }
+    }
   }
 }

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-  [Route("api/")]
+  [Route("api/[controller]")]
   [ApiController]
   public class UpdateController : Controller
   {
@@ -17,7 +17,7 @@ namespace API.Controllers
       _clipsService = clipsService;
     }
 
-    [HttpGet("update")]
+    [HttpGet]
     public async Task<IActionResult> Update()
     {
       var gamesList = await _gamesService.GetGamesFromTwitchAsync();

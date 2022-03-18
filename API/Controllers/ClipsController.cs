@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-  [Route("api/")]
+  [Route("api/[controller]")]
   [ApiController]
   public class ClipsController : Controller
   {
@@ -16,7 +16,7 @@ namespace API.Controllers
       _clipsService = clipsService;
     }
 
-    [HttpGet("clips")]
+    [HttpGet]
     public async Task<IActionResult> GetAllClips()
     {
       try
@@ -34,7 +34,7 @@ namespace API.Controllers
       }
     }
 
-    [HttpGet("clips/{quantity:int}")]
+    [HttpGet("{quantity:int}")]
     public async Task<IActionResult> GetClips([FromRoute] int quantity)
     {
       try
@@ -52,7 +52,7 @@ namespace API.Controllers
       }
     }
 
-    [HttpGet("clips/game/{id}")]
+    [HttpGet("game/{id}")]
     public async Task<IActionResult> GetAllClipsByGameId([FromRoute] string id)
     {
       try
@@ -70,7 +70,7 @@ namespace API.Controllers
       }
     }
 
-    [HttpGet("clips/game/{id}/{quantity:int}")]
+    [HttpGet("game/{id}/{quantity:int}")]
     public async Task<IActionResult> GetClipsByGameId([FromRoute] string id, int quantity)
     {
       try
@@ -88,7 +88,7 @@ namespace API.Controllers
       }
     }
 
-    [HttpGet("clips/daily")]
+    [HttpGet("daily")]
     public async Task<IActionResult> GetAllDailyClips()
     {
       try
@@ -106,7 +106,7 @@ namespace API.Controllers
       }
     }
 
-    [HttpGet("clips/daily/{quantity:int}")]
+    [HttpGet("daily/{quantity:int}")]
     public async Task<IActionResult> GetDailyClips([FromRoute] int quantity)
     {
       try
@@ -124,7 +124,7 @@ namespace API.Controllers
       }
     }
 
-    [HttpGet("clips/weekly")]
+    [HttpGet("weekly")]
     public async Task<IActionResult> GetAllWeeklyClips()
     {
       try
@@ -142,7 +142,7 @@ namespace API.Controllers
       }
     }
 
-    [HttpGet("clips/weekly/{quantity:int}")]
+    [HttpGet("weekly/{quantity:int}")]
     public async Task<IActionResult> GetWeeklyClips([FromRoute] int quantity)
     {
       try

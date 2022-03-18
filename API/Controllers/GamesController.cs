@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-  [Route("api/")]
+  [Route("api/[controller]")]
   [ApiController]
   public class GamesController : ControllerBase
   {
@@ -16,7 +16,7 @@ namespace API.Controllers
       _gamesService = gamesService;
     }
 
-    [HttpGet("topgames")]
+    [HttpGet]
     public async Task<IActionResult> GetTopGamesRequest()
     {
       try
