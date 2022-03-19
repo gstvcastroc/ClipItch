@@ -46,7 +46,7 @@ namespace API.Services
           .AsNoTracking()
           .FirstOrDefaultAsync(x => x.Id == entry.Id);
 
-        if (game is not null) return;
+        if (game is not null) continue;
 
         _context.Games.Add(entry);
         await _context.SaveChangesAsync();
@@ -63,7 +63,7 @@ namespace API.Services
       return json;
     }
 
-    private static string GetJson(List<Game> gamesList)
+    public static string GetJson(List<Game> gamesList)
     {
       var options = new JsonSerializerOptions { WriteIndented = true };
 

@@ -32,6 +32,9 @@ namespace API.Entities
     [JsonPropertyName("game_id")]
     public string GameId { get; set; }
 
+    [JsonPropertyName("game_name")]
+    public string GameName { get; set; }
+
     [JsonPropertyName("language")]
     public string Language { get; set; }
 

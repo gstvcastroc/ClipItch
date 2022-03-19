@@ -17,6 +17,7 @@ namespace API.Data
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+      modelBuilder.UseCollation("NOCASE");
       modelBuilder.ApplyConfiguration(new ClipMap());
       modelBuilder.ApplyConfiguration(new GameMap());
     }

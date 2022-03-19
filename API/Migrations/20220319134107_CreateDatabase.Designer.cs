@@ -9,16 +9,17 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220311173809_CreateDatabase")]
+    [Migration("20220319134107_CreateDatabase")]
     partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("Relational:Collation", "NOCASE")
                 .HasAnnotation("ProductVersion", "5.0.15");
 
-            modelBuilder.Entity("API.Models.Clip", b =>
+            modelBuilder.Entity("API.Entities.Clip", b =>
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(120)
@@ -65,6 +66,11 @@ namespace API.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("game_id");
 
+                    b.Property<string>("GameName")
+                        .HasMaxLength(120)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("game_name");
+
                     b.Property<string>("Language")
                         .HasMaxLength(120)
                         .HasColumnType("TEXT")
@@ -100,7 +106,7 @@ namespace API.Migrations
                     b.ToTable("Clip");
                 });
 
-            modelBuilder.Entity("API.Models.Game", b =>
+            modelBuilder.Entity("API.Entities.Game", b =>
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(120)

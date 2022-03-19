@@ -60,6 +60,11 @@ namespace API.Data.Mappings
         .HasColumnType("TEXT")
         .HasMaxLength(120);
 
+      builder.Property(x => x.GameName)
+        .HasColumnName("game_name")
+        .HasColumnType("TEXT")
+        .HasMaxLength(120);
+
       builder.Property(x => x.Language)
         .HasColumnName("language")
         .HasColumnType("TEXT")
