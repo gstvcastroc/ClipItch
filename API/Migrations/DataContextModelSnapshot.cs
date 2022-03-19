@@ -14,6 +14,7 @@ namespace API.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("Relational:Collation", "NOCASE")
                 .HasAnnotation("ProductVersion", "5.0.15");
 
             modelBuilder.Entity("API.Entities.Clip", b =>

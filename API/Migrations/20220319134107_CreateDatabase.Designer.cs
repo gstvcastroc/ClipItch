@@ -9,13 +9,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220318205840_CreateDatabase")]
+    [Migration("20220319134107_CreateDatabase")]
     partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("Relational:Collation", "NOCASE")
                 .HasAnnotation("ProductVersion", "5.0.15");
 
             modelBuilder.Entity("API.Entities.Clip", b =>
