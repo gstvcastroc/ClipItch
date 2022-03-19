@@ -32,16 +32,20 @@ namespace API.Services
 
       foreach (var query in filteredQueries)
       {
-        clipsList.AddRange(await _context.Clips
+        var search = await _context.Clips
           .AsNoTracking()
           .Where
           (clip =>
-           clip.Title.Contains(query) ||
-           clip.GameName.Contains(query) ||
-           clip.CreatorName.Contains(query) ||
-           clip.BroadcasterName.Contains(query))
-          .ToListAsync());
+           EF.Functions.Like(clip.Title, $"%{query}%") ||
+           EF.Functions.Like(clip.GameName, $"%{query}%") ||
+           EF.Functions.Like(clip.CreatorName, $"%{query}%") ||
+           EF.Functions.Like(clip.BroadcasterName, $"%{query}%"))
+          .ToListAsync();
+
+        clipsList.AddRange(search);
       }
+
+      clipsList.OrderByDescending(clips => clips.ViewCount);
 
       var json = ClipsService.GetJson(clipsList);
 
