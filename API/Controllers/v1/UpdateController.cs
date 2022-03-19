@@ -1,4 +1,5 @@
 ﻿using API.Interfaces;
+using API.Workers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -35,11 +36,9 @@ namespace API.Controllers.v1
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> Update()
     {
-      var gamesList = await _gamesService.GetGamesFromTwitchAsync();
-      await _gamesService.AddGamesToDatabaseAsync(gamesList);
+      await new GameWorker(_gamesService).Invoke();
 
-      var clipsList = await _clipsService.GetClipsFromTwitchAsync();
-      await _clipsService.AddClipsToDatabaseAsync(clipsList);
+      await new ClipsWorker(_clipsService).Invoke();
 
       return Ok();
     }
