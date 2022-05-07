@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+.nav-image {
+  content: url("assets/images/logo.png");
+  width: 18%;
+  height: 100%;
+}
+.gameFont {
+  background: #ffc107;
+}
+.top-right-img {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+}
+.bg-views {
+  background: rgba(0, 0, 0, 0.7);
+}

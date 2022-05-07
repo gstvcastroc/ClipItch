@@ -1,15 +1,48 @@
-<div class="md:container md:mx-auto">
-  <div *ngFor="let t of teste" class="block p-8 border border-gray-100 shadow-xl rounded-xl content-start ">
-    <span class="absolute right-4 top-4 rounded-full px-3 py-1.5 bg-green-100 text-green-600 font-medium text-xs">
-      4.3
-    </span>
-
-    <div class="mt-4 text-gray-500 sm:pr-8">
-
-      <img src="{{t.box_art_url.replace('{width}', '200').replace('{height}', '200')}}" class="rounded-full">
-
-      <h5 class="mt-4 text-xl font-bold text-gray-900">{{t.name}}</h5>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="px-5 navbar-brand" href="#">
+    <img class="nav-image" alt="">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li *ngFor="let menu of listaMenus" class="nav-item">
+        <a class="nav-link" href="{{menu.url}}">{{menu.name}}</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div *ngFor="let image of backgroundImages" class="carousel-item {{image.active}}">
+      <img class="d-block w-100 h-50" src=" {{image.src}}" alt="/">
+      <div class="carousel-caption d-none d-md-block">
+        <h1>{{image.game_name}}</h1>
+        <p>{{image.description}}</p>
+      </div>
     </div>
   </div>
 </div>
-  
+<div class="container">
+  <div class="row">
+    <div *ngFor="let weekly of weeklyClips" class="col-md-4 my-2 px-2">
+      <div class="card">
+        <a href="/"><img class="card-img-top" src="{{weekly.thumbnail_url}}" /> </a>
+        <div class="top-right-img text-white bg-views p-2 rounded">{{weekly.view_count | number : '1.0-2':'pt-BR'}} views</div>
+        <div class="card-body">
+          <div class="card-title w-1">
+            <b>{{weekly.broadcaster_name}}</b>
+          </div>         
+          <p class="card-text">{{weekly.title}}</p>
+          <b class="py-1 px-2 rounded gameFont">{{weekly.game_name}}</b>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer class="bg-dark text-center text-lg-start text-white">
+  <div class="text-center p-3">
+    © 2022 Copyright: ClipItch
+  </div>
+</footer>
