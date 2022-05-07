@@ -20,13 +20,16 @@ export class AppComponent implements OnInit {
   listaMenus: any = [{ url: '/', name: 'Home' }, { url: '/', name: 'Login' }];
 
   backgroundImages: any = [
-    { src: '../assets/images/apex.jpg', active: 'active', game_name: 'Apex Legends', description: 'Mussum Ipsum, cacilds vidis litro abertis. Quem manda na minha terra sou euzis!Si num tem leite então bota uma pinga aí cumpadi!Copo furadis é disculpa de bebadis, arcu quam euismod magna.Interagi no mé, cursus quis, vehicula ac nisi.' },
-    { src: '../assets/images/fortnite.jpg', active: '', game_name: 'Fortnite', description: 'Mussum Ipsum, cacilds vidis litro abertis. Quem manda na minha terra sou euzis!Si num tem leite então bota uma pinga aí cumpadi!Copo furadis é disculpa de bebadis, arcu quam euismod magna.Interagi no mé, cursus quis, vehicula ac nisi.'  },
-    { src: '../assets/images/overwatch.jpg', active: '', game_name: 'Overwatch', description: 'Mussum Ipsum, cacilds vidis litro abertis. Quem manda na minha terra sou euzis!Si num tem leite então bota uma pinga aí cumpadi!Copo furadis é disculpa de bebadis, arcu quam euismod magna.Interagi no mé, cursus quis, vehicula ac nisi.'  }];
+    { src: '../assets/images/apex.jpg', flag: '../assets/images/apexIcon.png', active: 'active', game_name: 'Apex Legends', color_overlay: '#7E342D', description: 'Mussum Ipsum, cacilds vidis litro abertis. Quem manda na minha terra sou euzis!Si num tem leite então bota uma pinga aí cumpadi!Copo furadis é disculpa de bebadis, arcu quam euismod magna.Interagi no mé, cursus quis, vehicula ac nisi.' },
+    { src: '../assets/images/fortnite.jpg', flag: '../assets/images/fortniteIcon.png', active: '', game_name: 'Fortnite', color_overlay: '#427CA2', description: 'Mussum Ipsum, cacilds vidis litro abertis. Quem manda na minha terra sou euzis!Si num tem leite então bota uma pinga aí cumpadi!Copo furadis é disculpa de bebadis, arcu quam euismod magna.Interagi no mé, cursus quis, vehicula ac nisi.'  },
+    { src: '../assets/images/overwatch.jpg', flag: '../assets/images/overwatchIcon.png', active: '', game_name: 'Overwatch', color_overlay: '#3C4667', description: 'Mussum Ipsum, cacilds vidis litro abertis. Quem manda na minha terra sou euzis!Si num tem leite então bota uma pinga aí cumpadi!Copo furadis é disculpa de bebadis, arcu quam euismod magna.Interagi no mé, cursus quis, vehicula ac nisi.'  }];
 
   ngOnInit() {
-    this.http.get<any>('https://localhost:5001/api/v1/Clips/weekly/10').subscribe(clipes => {
-      this.weeklyClips = clipes;
-    })
+    this.http.get<any>('https://localhost:5001/api/v1/Games').subscribe(games => {
+      this.http.get<any>('https://localhost:5001/api/v1/Clips/weekly').subscribe(clipes => {
+        this.weeklyClips = clipes;
+        this.listaGames = games;
+      })    
+    })      
   }
 }

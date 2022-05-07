@@ -15,16 +15,28 @@
 </nav>
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
-    <div *ngFor="let image of backgroundImages" class="carousel-item {{image.active}}">
-      <img class="d-block w-100 h-50" src=" {{image.src}}" alt="/">
-      <div class="carousel-caption d-none d-md-block">
-        <h1>{{image.game_name}}</h1>
-        <p>{{image.description}}</p>
+    <div *ngFor="let image of backgroundImages" [style.background-color]="image.color_overlay" class="carousel-item {{image.active}}">
+      <img id="multiplyImg" class="d-block w-100 h-50" src="{{image.src}}" alt="/">
+      <div class="carousel-caption d-block d-md-block">
+        <h1 class="TekoFont">{{image.game_name}}</h1>
+        <img width="75" src=" {{image.flag}}" alt="/">
+        <p class="PoppinsFont">{{image.description}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="bg-light">
+  <div class="container-fluid py-3">
+    <h1 class="text-center TekoFont">Tags</h1>
+    <div class="d-flex justify-content-start">
+      <div *ngFor="let game of listaGames" class="col-sm-1 px-2">
+        <a href="/" data-toggle="tooltip" data-placement="bottom" title="{{game.name}}"><img class="rounded-circle w-100" src="{{game.box_art_url.replace('{width}', '200').replace('{height}', '200')}}"></a>
       </div>
     </div>
   </div>
 </div>
 <div class="container">
+  <h1 class="text-center py-3 TekoFont">Clipes da Semana</h1>
   <div class="row">
     <div *ngFor="let weekly of weeklyClips" class="col-md-4 my-2 px-2">
       <div class="card">
@@ -33,7 +45,7 @@
         <div class="card-body">
           <div class="card-title w-1">
             <b>{{weekly.broadcaster_name}}</b>
-          </div>         
+          </div>
           <p class="card-text">{{weekly.title}}</p>
           <b class="py-1 px-2 rounded gameFont">{{weekly.game_name}}</b>
         </div>

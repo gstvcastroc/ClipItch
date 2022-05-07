@@ -3,14 +3,37 @@
   width: 18%;
   height: 100%;
 }
+
 .gameFont {
   background: #ffc107;
 }
+
 .top-right-img {
   position: absolute;
   top: 8px;
   right: 16px;
 }
+
 .bg-views {
   background: rgba(0, 0, 0, 0.7);
+}
+
+.TekoFont {
+  font-family: Teko;
+}
+
+.PoppinsFont {
+  font-family: Poppins;
+}
+
+.carousel-item #multiplyImg {
+  mix-blend-mode: multiply;
+  opacity: 40%;
+  height: 92vh !important;
+}
+
+.carousel-caption {
+  top: 50%;
+  transform: translateY(-50%);
+  bottom: initial;
 }
