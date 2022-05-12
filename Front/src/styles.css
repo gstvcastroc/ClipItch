@@ -37,3 +37,11 @@
   transform: translateY(-50%);
   bottom: initial;
 }
+
+.active{
+    display: block;
+}
+
+.hidden{
+    display: none
+}

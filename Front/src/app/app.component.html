@@ -25,18 +25,39 @@
     </div>
   </div>
 </div>
+<div class="container-fluid justify-content-center py-3">
+  <h1 class="text-center TekoFont">Tags</h1>
+  <div class="d-flex justify-content-around">
+    <button class="btn text-dark my-auto" (click)="previous()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+    <div [class]="slides[selectedIndex] == slide ? 'active': 'hidden'" *ngFor="let slide of slides" class="col-1 px-2" align="center">
+      <a href="/"><img class="shadow-lg my-5 rounded-circle" src="{{slide.box_art_url.replace('{width}', '200').replace('{height}', '200')}}"></a>
+      <b class="py-1 px-2 rounded gameFont">{{slide.name}}</b>
+    </div>
+    <button class="btn text-dark my-auto" (click)="next()"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+  </div>
+</div>
 <div class="bg-light">
-  <div class="container-fluid py-3">
-    <h1 class="text-center TekoFont">Tags</h1>
-    <div class="d-flex justify-content-start">
-      <div *ngFor="let game of listaGames" class="col-sm-1 px-2">
-        <a href="/" data-toggle="tooltip" data-placement="bottom" title="{{game.name}}"><img class="rounded-circle w-100" src="{{game.box_art_url.replace('{width}', '200').replace('{height}', '200')}}"></a>
+  <div class="container">
+    <h1 class="text-center py-3 TekoFont">Diário</h1>
+    <div class="row">
+      <div *ngFor="let daily of dailyClips" class="col-md-4 my-2 px-2">
+        <div class="card">
+          <a href="/"><img class="card-img-top" src="{{daily.thumbnail_url}}" /> </a>
+          <div class="top-right-img text-white bg-views p-2 rounded">{{daily.view_count | number : '1.0-2':'pt-BR'}} views</div>
+          <div class="card-body">
+            <div class="card-title w-1">
+              <b>{{daily.broadcaster_name}}</b>
+            </div>
+            <p class="card-text">{{daily.title}}</p>
+            <b class="py-1 px-2 rounded gameFont">{{daily.game_name}}</b>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 <div class="container">
-  <h1 class="text-center py-3 TekoFont">Clipes da Semana</h1>
+  <h1 class="text-center py-3 TekoFont">Semanal</h1>
   <div class="row">
     <div *ngFor="let weekly of weeklyClips" class="col-md-4 my-2 px-2">
       <div class="card">
