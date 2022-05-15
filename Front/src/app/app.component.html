@@ -42,7 +42,7 @@
     <div class="row">
       <div *ngFor="let daily of dailyClips" class="col-md-4 my-2 px-2">
         <div class="card">
-          <a href="/"><img class="card-img-top" src="{{daily.thumbnail_url}}" /> </a>
+          <a (click)="open(0)"><img class="card-img-top" src="{{daily.thumbnail_url}}" /> </a>
           <div class="top-right-img text-white bg-views p-2 rounded">{{daily.view_count | number : '1.0-2':'pt-BR'}} views</div>
           <div class="card-body">
             <div class="card-title w-1">
@@ -61,7 +61,7 @@
   <div class="row">
     <div *ngFor="let weekly of weeklyClips" class="col-md-4 my-2 px-2">
       <div class="card">
-        <a href="/"><img class="card-img-top" src="{{weekly.thumbnail_url}}" /> </a>
+        <a style="cursor: pointer" (click)="open(0)"><img class="card-img-top" src="{{weekly.thumbnail_url}}" /> </a>
         <div class="top-right-img text-white bg-views p-2 rounded">{{weekly.view_count | number : '1.0-2':'pt-BR'}} views</div>
         <div class="card-body">
           <div class="card-title w-1">

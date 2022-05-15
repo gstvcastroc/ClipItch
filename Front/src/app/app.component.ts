@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from './modals/modal/modal.component';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,7 +14,9 @@ export class AppComponent implements OnInit {
 
   selectedIndex: number = 0;
 
-  constructor(private http: HttpClient) { }
+  closeResult: string | undefined;
+
+  constructor(private http: HttpClient, private modalService: NgbModal) { }
 
   slides: any;
 
@@ -22,7 +27,19 @@ export class AppComponent implements OnInit {
   previous() {
     if (this.selectedIndex > 0) {
       --this.selectedIndex;
-    } 
+    }
+  }
+
+  open(clipId: number) {
+    const modalRef = this.modalService.open(ModalComponent,
+      {
+        scrollable: true,
+        windowClass: 'modalClass'
+      });
+
+    this.http.get<any>('https://localhost:5001/api/v1/Clips/1').subscribe(data => {
+      modalRef.componentInstance.fromParent = data[0];
+    })
   }
 
   dailyClips: any;
