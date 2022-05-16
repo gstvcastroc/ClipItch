@@ -311,11 +311,40 @@ namespace API.Controllers.v1
             }
         }
 
-        [HttpGet("check")]
-        public async Task<IActionResult> checaPaNoz()
+        /// <summary>
+        /// Busca o clipe pelo id.
+        /// O id do clip deve ser passado na requisição.
+        /// </summary>
+        /// <param name="idClip">Id do clipe.</param>
+        /// <returns>JSON com o clipe solicitado.</returns>
+        /// <remarks>
+        /// Exemplo de requisição:
+        ///
+        ///     GET api/v1/clips/TacitAmericanJaguarTooSpicy-Xy5mBaVC8k8VEFEG
+        ///     
+        /// </remarks>
+        /// <response code="200">JSON retornado com sucesso.</response>
+        /// <response code="400">Erro no cliente.</response>
+        /// <response code="404">Retorno vazio.</response>
+        [HttpGet("{idClip:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetClipById([FromRoute] string idClip)
         {
-            Console.WriteLine("Bateu");
-            return Ok();
+            try
+            {
+                var clip = await _clipsService.GetClipById(idClip);
+
+                if (clip is null) return NotFound("Retorno sem dados, favor reavaliar os inputs fornecidos.");
+
+                return Ok(clip);
+            }
+
+            catch (Exception)
+            {
+                return BadRequest("Erro na requisição.");
+            }
         }
     }
 }
