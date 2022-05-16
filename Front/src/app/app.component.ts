@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './modals/modal/modal.component';
 
+const parent: string = 'localhost';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -33,12 +35,15 @@ export class AppComponent implements OnInit {
   open(clipId: number) {
     const modalRef = this.modalService.open(ModalComponent,
       {
-        scrollable: true,
-        windowClass: 'modalClass'
+        size: 'lg',
+        centered: true,
+        scrollable : false
       });
 
+    //use ClipId to get proper clip, need to implement te http request for this
     this.http.get<any>('https://localhost:5001/api/v1/Clips/1').subscribe(data => {
       modalRef.componentInstance.fromParent = data[0];
+      modalRef.componentInstance.url = 'https://clips.twitch.tv/embed?clip=' + data[0].id + '&autoplay=true&muted=false&parent=' + parent;
     })
   }
 

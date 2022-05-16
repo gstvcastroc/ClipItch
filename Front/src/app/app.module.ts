@@ -10,13 +10,15 @@ import { AppComponent } from './app.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './modals/modal/modal.component';
+import { SafePipe } from './safe.pipe';
 
 registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
     AppComponent,
-    ModalComponent
+    ModalComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,
