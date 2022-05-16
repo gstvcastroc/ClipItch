@@ -206,11 +206,23 @@ namespace API.Services
             return json;
         }
 
-        public async Task<Clip> GetClipById(string idClip)
+        public static string GetJson(Clip clip)
+        {
+            var options = new JsonSerializerOptions { WriteIndented = true };
+
+            var json = JsonSerializer.Serialize(clip, options);
+
+            return json;
+        }
+
+
+        public async Task<string> GetClipById(string idClip)
         {
             var clipsList = await _context.Clips.AsNoTracking().FirstOrDefaultAsync(x => x.Id == idClip);
 
-            return clipsList;
+            var json = GetJson(clipsList);
+
+            return json;
         }
     }
 }
