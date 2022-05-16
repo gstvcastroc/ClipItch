@@ -12,6 +12,13 @@ h5 {
   font-family: "Pattaya", serif;
 }
 
+
+.cardImg:hover {
+  border-left: 4px solid #BBAED6 !important;
+  border-bottom: 4px solid #BBAED6 !important;
+  transform: scale(1.01);
+}
+
 b.bFont {
   font-family: "Roboto", serif;
   font-size: 1.5rem;
@@ -83,7 +90,6 @@ b.clipedFont {
   background-attachment: scroll;
   background-position: center center;
   background-size: cover;
-  margin: 60% auto;
   width: auto;
 }
 
@@ -116,7 +122,6 @@ b.clipedFont {
   border: none !important;
 }
 
-/* Modal Body */
 .modal-body {
   padding: 2px 16px;
 }

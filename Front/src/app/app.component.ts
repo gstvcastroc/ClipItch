@@ -36,14 +36,19 @@ export class AppComponent implements OnInit {
     const modalRef = this.modalService.open(ModalComponent,
       {
         size: 'lg',
-        centered: true,
-        scrollable : false
+        modalDialogClass: 'modal-dialog modal-dialog-centered'
       });
 
+    let formatUrl: string = 'https://localhost:5001/api/v1/Clips/' + clipId;
+
     //use ClipId to get proper clip, need to implement te http request for this
-    this.http.get<any>('https://localhost:5001/api/v1/Clips/1').subscribe(data => {
-      modalRef.componentInstance.fromParent = data[0];
-      modalRef.componentInstance.url = 'https://clips.twitch.tv/embed?clip=' + data[0].id + '&autoplay=true&muted=false&parent=' + parent;
+    this.http.get<any>(formatUrl).subscribe(data => {
+
+      modalRef.componentInstance.url = 'https://clips.twitch.tv/embed?clip=' + data.id + '&autoplay=true&muted=false&parent=' + parent;
+      modalRef.componentInstance.broadcaster_name = data.broadcaster_name;
+      modalRef.componentInstance.title = data.title;
+      modalRef.componentInstance.game_name = data.game_name;
+      modalRef.componentInstance.creator_name = data.creator_name;   
     })
   }
 
