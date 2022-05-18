@@ -1,5 +1,4 @@
 using API.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -7,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace API.Controllers.v1
 {
-    [ApiController]
+  [ApiController]
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     //[Produces("application/json")] Ao habilitar essa anotação, o Swagger UI otimiza o JSON e remove a formatação.
@@ -334,7 +333,7 @@ namespace API.Controllers.v1
         {
             try
             {
-                var clip = await _clipsService.GetClipById(clipId);
+                var clip = await _clipsService.GetClipByIdAsync(clipId);
 
                 if (clip is null) return NotFound("Retorno sem dados, favor reavaliar os inputs fornecidos.");
 

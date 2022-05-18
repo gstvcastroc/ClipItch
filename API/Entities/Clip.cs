@@ -20,6 +20,9 @@ namespace API.Entities
     [JsonPropertyName("broadcaster_name")]
     public string BroadcasterName { get; set; }
 
+    [JsonPropertyName("profile_image_url")]
+    public string BroadcasterProfileImageUrl { get; set; }
+
     [JsonPropertyName("creator_id")]
     public string CreatorId { get; set; }
 

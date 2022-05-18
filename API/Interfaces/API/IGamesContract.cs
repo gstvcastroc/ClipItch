@@ -2,9 +2,9 @@ using API.Models.Response;
 using Refit;
 using System.Threading.Tasks;
 
-namespace API.Interfaces
+namespace API.Interfaces.API
 {
-    public interface IGamesInterface
+    public interface IGamesContract
     {
         [Get("/helix/games/top")]
         [Headers("Authorization: Bearer")]

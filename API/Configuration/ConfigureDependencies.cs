@@ -1,5 +1,6 @@
 using API.Data;
 using API.Interfaces;
+using API.Interfaces.API;
 using API.Services;
 using API.Workers;
 using Coravel;
@@ -21,14 +22,17 @@ namespace API.Configuration
       // Adição do Refit.
       var baseUrl = configuration["TwitchAPI"].ToString();
 
-      services.AddRefitClient<IGamesInterface>()
+      services.AddRefitClient<IGamesContract>()
       .ConfigureHttpClient(options => options.BaseAddress = new Uri(baseUrl));
 
-      services.AddRefitClient<IClipsInterface>()
+      services.AddRefitClient<IClipsContract>()
+      .ConfigureHttpClient(options => options.BaseAddress = new Uri(baseUrl));
+
+      services.AddRefitClient<IUsersContract>()
       .ConfigureHttpClient(options => options.BaseAddress = new Uri(baseUrl));
 
       // Adição do serviço de autenticação.
-      services.AddSingleton<IAuthentication, Authentication>();
+      services.AddSingleton<IAuthenticationContract, Authentication>();
 
       // Adição do banco de dados.
       services.AddDbContext<DataContext>();
@@ -38,6 +42,7 @@ namespace API.Configuration
       services.AddSingleton<IGamesService, GamesService>();
       services.AddSingleton<IClipsService, ClipsService>();
       services.AddSingleton<ISearchService, SearchService>();
+      services.AddSingleton<IUsersService, UsersService>();
 
       // Adição dos serviços de workers.
       services.AddScheduler();
