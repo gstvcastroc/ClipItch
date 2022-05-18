@@ -1,9 +1,9 @@
 ﻿using API.Models;
 using System.Threading.Tasks;
 
-namespace API.Interfaces
+namespace API.Interfaces.API
 {
-  public interface IAuthentication
+  public interface IAuthenticationContract
   {
     string ClientId { get; }
     Task<Token> GetToken();

@@ -2,9 +2,9 @@ using API.Models.Response;
 using Refit;
 using System.Threading.Tasks;
 
-namespace API.Interfaces
+namespace API.Interfaces.API
 {
-    public interface IClipsInterface
+    public interface IClipsContract
     {
         [Get("/helix/clips?game_id={id}")]
         [Headers("Authorization: Bearer")]

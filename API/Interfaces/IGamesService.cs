@@ -9,5 +9,6 @@ namespace API.Interfaces
     Task<List<Game>> GetGamesFromTwitchAsync();
     Task AddGamesToDatabaseAsync(List<Game> gameList);
     Task<string> GetGamesAsync();
+    Task<string> GetGameNameAsync(string gameId);
   }
 }

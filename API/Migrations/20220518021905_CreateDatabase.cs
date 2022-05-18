@@ -16,6 +16,7 @@ namespace API.Migrations
                     embed_url = table.Column<string>(type: "TEXT", maxLength: 120, nullable: true),
                     broadcaster_id = table.Column<string>(type: "TEXT", maxLength: 120, nullable: true),
                     broadcaster_name = table.Column<string>(type: "TEXT", maxLength: 120, nullable: true),
+                    broadcaster_profile_image_url = table.Column<string>(type: "TEXT", maxLength: 120, nullable: true),
                     creator_id = table.Column<string>(type: "TEXT", maxLength: 120, nullable: true),
                     creator_name = table.Column<string>(type: "TEXT", maxLength: 120, nullable: true),
                     video_id = table.Column<string>(type: "TEXT", maxLength: 120, nullable: true),

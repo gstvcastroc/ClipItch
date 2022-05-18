@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220319134107_CreateDatabase")]
+    [Migration("20220518021905_CreateDatabase")]
     partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,6 +35,11 @@ namespace API.Migrations
                         .HasMaxLength(120)
                         .HasColumnType("TEXT")
                         .HasColumnName("broadcaster_name");
+
+                    b.Property<string>("BroadcasterProfileImageUrl")
+                        .HasMaxLength(120)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("broadcaster_profile_image_url");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasMaxLength(120)
