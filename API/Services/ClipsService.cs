@@ -1,6 +1,8 @@
 ﻿using API.Data;
 using API.Entities;
 using API.Interfaces;
+using API.Interfaces.API;
+using API.Utils;
 using Microsoft.EntityFrameworkCore;
 using Refit;
 using System;
@@ -13,17 +15,20 @@ namespace API.Services
 {
   public class ClipsService : IClipsService
   {
-    private readonly IAuthentication _authentication;
+    private readonly IAuthenticationContract _authentication;
     private readonly IGamesService _gamesService;
+    private readonly IUsersService _usersService;
     private readonly DataContext _context;
 
     public ClipsService(
-      IAuthentication authentication,
+      IAuthenticationContract authentication,
       IGamesService gamesService,
+      IUsersService usersService,
       DataContext context)
     {
       _authentication = authentication;
       _gamesService = gamesService;
+      _usersService = usersService;
       _context = context;
     }
 
@@ -32,7 +37,9 @@ namespace API.Services
     {
       var token = await _authentication.GetToken();
 
-      var gamesList = await _gamesService.GetGamesFromTwitchAsync();
+      var gamesListJson = await _gamesService.GetGamesAsync();
+
+      var gamesList = JsonSerializer.Deserialize<List<Game>>(gamesListJson);
 
       var clipsList = new List<Clip>();
 
@@ -40,7 +47,7 @@ namespace API.Services
       {
         int gameId = int.Parse(game.Id);
 
-        var callback = RestService.For<IClipsInterface>("https://api.twitch.tv/", new RefitSettings()
+        var callback = RestService.For<IClipsContract>("https://api.twitch.tv/", new RefitSettings()
         {
           AuthorizationHeaderValueGetter = () => Task.FromResult(token.AccessToken)
         });
@@ -57,6 +64,23 @@ namespace API.Services
     // Método para adicionar a lista de clips no banco de dados.
     public async Task AddClipsToDatabaseAsync(List<Clip> clipsList)
     {
+      var finalParams = new List<string>();
+
+      var queryParams = new List<string>();
+
+      var broadcasters = new List<User>();
+
+      foreach (var clip in clipsList) finalParams.Add(clip.BroadcasterId);
+
+      while (finalParams.Count() > 100)
+      {
+        queryParams = finalParams.Take(100).ToList();
+        finalParams.RemoveRange(0, 100);
+
+        broadcasters.AddRange(await _usersService.GetBroadcasters(queryParams));
+      }
+
+      broadcasters.AddRange(await _usersService.GetBroadcasters(finalParams));
 
       foreach (var entry in clipsList)
       {
@@ -66,12 +90,22 @@ namespace API.Services
 
         if (clip is not null) continue;
 
-        // Adiciona o nome do jogo ao clip.
-        entry.GameName = await GetGameName(entry.GameId);
+        // Adiciona o nome do jogo e o URL da imagem do streamer ao clip.
+        entry.GameName = await _gamesService.GetGameNameAsync(entry.GameId);
+        entry.BroadcasterProfileImageUrl = GetBroadcasterProfileImageUrl(broadcasters, entry.BroadcasterId);
 
         _context.Clips.Add(entry);
         await _context.SaveChangesAsync();
       }
+    }
+
+    private string GetBroadcasterProfileImageUrl(List<User> broadcasters, string broadcasterId)
+    {
+      var broadcaster = broadcasters.FirstOrDefault(broadcaster => broadcaster.Id == broadcasterId);
+
+      if (broadcaster is null) return null;
+
+      return broadcaster.ProfileImageUrl;
     }
 
     // Método para buscar a lista de clips no banco de dados e enviá-la em formato JSON. Lista ordenada apenas de acordo com o número de visualizações, independente das datas dos clips. Recebe a quantidade de clips a ser retornada como parâmetro. Caso esse parâmetro seja nulo, retorna todos os clips.
@@ -96,7 +130,7 @@ namespace API.Services
           .ToListAsync();
       }
 
-      var json = GetJson(clipsList);
+      var json = Serialization.GetJson(clipsList);
 
       return json;
     }
@@ -125,7 +159,7 @@ namespace API.Services
           .ToListAsync();
       }
 
-      var json = GetJson(clipsList);
+      var json = Serialization.GetJson(clipsList);
 
       return json;
     }
@@ -139,7 +173,7 @@ namespace API.Services
       {
         clipsList = await _context.Clips
           .AsNoTracking()
-          .Where(x => x.CreatedAt.Date == DateTime.Today)
+          .Where(x => x.CreatedAt.Date == DateTime.Today.AddDays(-3))
           .OrderByDescending(x => x.ViewCount)
           .ToListAsync();
       }
@@ -148,13 +182,13 @@ namespace API.Services
       {
         clipsList = await _context.Clips
           .AsNoTracking()
-          .Where(x => x.CreatedAt.Date == DateTime.Today)
+          .Where(x => x.CreatedAt.Date == DateTime.Today.AddDays(-3))
           .OrderByDescending(x => x.ViewCount)
           .Take(quantity.Value)
           .ToListAsync();
       }
 
-      var json = GetJson(clipsList);
+      var json = Serialization.GetJson(clipsList);
 
       return json;
     }
@@ -183,28 +217,18 @@ namespace API.Services
           .ToListAsync();
       }
 
-      var json = GetJson(clipsList);
+      var json = Serialization.GetJson(clipsList);
 
       return json;
     }
 
-    private async Task<string> GetGameName(string gameId)
+    public async Task<string> GetClipByIdAsync(string clipId)
     {
-      var game = await _context.Games
-        .AsNoTracking()
-        .FirstOrDefaultAsync(game => game.Id == gameId);
+      var clip = await _context.Clips.AsNoTracking().FirstOrDefaultAsync(x => x.Id == clipId);
 
-      return game.Name;
-    }
-
-    public static string GetJson(List<Clip> clipsList)
-    {
-      var options = new JsonSerializerOptions { WriteIndented = true };
-
-      var json = JsonSerializer.Serialize(clipsList, options);
+      var json = Serialization.GetJson(clip);
 
       return json;
     }
-
   }
 }

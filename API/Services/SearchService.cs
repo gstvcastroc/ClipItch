@@ -1,6 +1,7 @@
 ﻿using API.Data;
 using API.Entities;
 using API.Interfaces;
+using API.Utils;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +48,7 @@ namespace API.Services
 
       clipsList.OrderByDescending(clips => clips.ViewCount);
 
-      var json = ClipsService.GetJson(clipsList);
+      var json = Serialization.GetJson(clipsList);
 
       return json;
     }

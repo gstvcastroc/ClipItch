@@ -1,4 +1,4 @@
-using API.Interfaces;
+using API.Interfaces.API;
 using API.Models;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace API.Configuration
 {
-  public class Authentication : IAuthentication
+  public class Authentication : IAuthenticationContract
   {
     // Propriedade que representa o client ID da API do Twitch.
     public string ClientId { get; } = "kgl6s2v5suh14svu58vdbdzpazxc0j";

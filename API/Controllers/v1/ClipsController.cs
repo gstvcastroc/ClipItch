@@ -1,5 +1,4 @@
 using API.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -7,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace API.Controllers.v1
 {
-    [ApiController]
+  [ApiController]
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     //[Produces("application/json")] Ao habilitar essa anotação, o Swagger UI otimiza o JSON e remove a formatação.
@@ -311,11 +310,40 @@ namespace API.Controllers.v1
             }
         }
 
-        [HttpGet("check")]
-        public async Task<IActionResult> checaPaNoz()
+        /// <summary>
+        /// Busca o clipe pelo id.
+        /// O id do clip deve ser passado na requisição.
+        /// </summary>
+        /// <param name="clipId">Id do clipe.</param>
+        /// <returns>JSON com o clipe solicitado.</returns>
+        /// <remarks>
+        /// Exemplo de requisição:
+        ///
+        ///     GET api/v1/clips/TacitAmericanJaguarTooSpicy-Xy5mBaVC8k8VEFEG
+        ///     
+        /// </remarks>
+        /// <response code="200">JSON retornado com sucesso.</response>
+        /// <response code="400">Erro no cliente.</response>
+        /// <response code="404">Retorno vazio.</response>
+        [HttpGet("{clipId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetClipById([FromRoute] string clipId)
         {
-            Console.WriteLine("Bateu");
-            return Ok();
+            try
+            {
+                var clip = await _clipsService.GetClipByIdAsync(clipId);
+
+                if (clip is null) return NotFound("Retorno sem dados, favor reavaliar os inputs fornecidos.");
+
+                return Ok(clip);
+            }
+
+            catch (Exception)
+            {
+                return BadRequest("Erro na requisição.");
+            }
         }
     }
 }

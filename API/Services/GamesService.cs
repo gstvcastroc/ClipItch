@@ -1,20 +1,21 @@
 ﻿using API.Data;
 using API.Entities;
 using API.Interfaces;
+using API.Interfaces.API;
+using API.Utils;
 using Microsoft.EntityFrameworkCore;
 using Refit;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace API.Services
 {
   public class GamesService : IGamesService
   {
-    private readonly IAuthentication _authentication;
+    private readonly IAuthenticationContract _authentication;
     private readonly DataContext _context;
 
-    public GamesService(DataContext context, IAuthentication authentication)
+    public GamesService(DataContext context, IAuthenticationContract authentication)
     {
       _context = context;
       _authentication = authentication;
@@ -25,7 +26,7 @@ namespace API.Services
     {
       var token = await _authentication.GetToken();
 
-      var callback = RestService.For<IGamesInterface>("https://api.twitch.tv/", new RefitSettings()
+      var callback = RestService.For<IGamesContract>("https://api.twitch.tv/", new RefitSettings()
       {
         AuthorizationHeaderValueGetter = () => Task.FromResult(token.AccessToken)
       });
@@ -58,18 +59,18 @@ namespace API.Services
     {
       var gamesList = await _context.Games.AsNoTracking().ToListAsync();
 
-      var json = GetJson(gamesList);
+      var json = Serialization.GetJson(gamesList);
 
       return json;
     }
 
-    public static string GetJson(List<Game> gamesList)
+    public async Task<string> GetGameNameAsync(string gameId)
     {
-      var options = new JsonSerializerOptions { WriteIndented = true };
+      var game = await _context.Games
+        .AsNoTracking()
+        .FirstOrDefaultAsync(game => game.Id == gameId);
 
-      var json = JsonSerializer.Serialize(gamesList, options);
-
-      return json;
+      return game.Name;
     }
   }
 }

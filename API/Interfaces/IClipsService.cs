@@ -12,5 +12,6 @@ namespace API.Interfaces
     Task<string> GetClipsByGameIdAsync(string gameId, int? quantity);
     Task<string> GetDailyClipsAsync(int? quantity);
     Task<string> GetWeeklyClipsAsync(int? quantity);
+    Task<string> GetClipByIdAsync(string idClip);
   }
 }
