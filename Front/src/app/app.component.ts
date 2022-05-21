@@ -20,10 +20,12 @@ export class AppComponent implements OnInit {
 
   constructor(private http: HttpClient, private modalService: NgbModal) { }
 
-  slides: any;
+  slides: Array<any> = [];
 
   next() {
-    ++this.selectedIndex;
+    if (this.selectedIndex < (this.slides.length - 1)) {
+      ++this.selectedIndex;
+    }
   }
 
   previous() {
@@ -32,7 +34,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  open(clipId: number) {
+  open(clipId: string) {
     const modalRef = this.modalService.open(ModalComponent,
       {
         size: 'lg',
@@ -43,22 +45,17 @@ export class AppComponent implements OnInit {
 
     //use ClipId to get proper clip, need to implement te http request for this
     this.http.get<any>(formatUrl).subscribe(data => {
-
+      modalRef.componentInstance.id = clipId;
       modalRef.componentInstance.url = 'https://clips.twitch.tv/embed?clip=' + data.id + '&autoplay=true&muted=false&parent=' + parent;
       modalRef.componentInstance.broadcaster_name = data.broadcaster_name;
       modalRef.componentInstance.title = data.title;
       modalRef.componentInstance.game_name = data.game_name;
-      modalRef.componentInstance.creator_name = data.creator_name;   
+      modalRef.componentInstance.profile_image_url = data.profile_image_url;
+      modalRef.componentInstance.auth = false;
     })
   }
 
-  dailyClips: any;
-
-  weeklyClips: any;
-
   allClips: any;
-
-  listaMenus: any = [{ url: '/', name: 'Home' }, { url: '/', name: 'Login' }];
 
   backgroundImages: any = [
     { src: '../assets/images/apex.jpg', flag: '../assets/images/apexIcon.png', active: 'active', game_name: 'Apex Legends', color_overlay: '#7E342D', description: 'Mussum Ipsum, cacilds vidis litro abertis. Quem manda na minha terra sou euzis!Si num tem leite então bota uma pinga aí cumpadi!Copo furadis é disculpa de bebadis, arcu quam euismod magna.Interagi no mé, cursus quis, vehicula ac nisi.' },
@@ -67,13 +64,20 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.http.get<any>('https://localhost:5001/api/v1/Games').subscribe(games => {
-      this.http.get<any>('https://localhost:5001/api/v1/Clips/daily/12').subscribe(daily => {
-        this.http.get<any>('https://localhost:5001/api/v1/Clips/weekly/12').subscribe(weekly => {
-          this.dailyClips = daily;
-          this.weeklyClips = weekly;
-          this.slides = games;
-        })
+      this.http.get<any>('https://localhost:5001/api/v1/Clips/30').subscribe(clips => {
+        this.allClips = clips;
+        this.slides = games;
       })
     })
+  }
+
+  abrirModalAuth() {
+    const modalRef = this.modalService.open(ModalComponent,
+      {
+        size: 'lg',
+        modalDialogClass: 'modal-dialog modal-dialog-centered'
+      });
+
+    modalRef.componentInstance.auth = true;
   }
 }

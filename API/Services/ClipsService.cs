@@ -173,7 +173,7 @@ namespace API.Services
       {
         clipsList = await _context.Clips
           .AsNoTracking()
-          .Where(x => x.CreatedAt.Date == DateTime.Today)
+          .Where(x => x.CreatedAt.Date == DateTime.Today.AddDays(-3))
           .OrderByDescending(x => x.ViewCount)
           .ToListAsync();
       }
@@ -182,7 +182,7 @@ namespace API.Services
       {
         clipsList = await _context.Clips
           .AsNoTracking()
-          .Where(x => x.CreatedAt.Date == DateTime.Today)
+          .Where(x => x.CreatedAt.Date == DateTime.Today.AddDays(-3))
           .OrderByDescending(x => x.ViewCount)
           .Take(quantity.Value)
           .ToListAsync();

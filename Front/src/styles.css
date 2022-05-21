@@ -1,7 +1,5 @@
 body {
   font-family: "Roboto", serif;
-  width: 100vw;
-  height: 100vh;
 }
 
 h1,
@@ -12,6 +10,11 @@ h5 {
   font-family: "Pattaya", serif;
 }
 
+.starHover:hover {
+  color: #ffc107 !important;
+  text-decoration: none;
+  cursor: pointer;
+}
 
 .cardImg:hover {
   border-left: 4px solid #BBAED6 !important;
@@ -132,7 +135,7 @@ b.clipedFont {
 }
 
 .imgsModal {
-  width: 15%;
+  width: 15% !important;
 }
 
 .iframeModal {
@@ -142,7 +145,7 @@ b.clipedFont {
 
 /* Define o css para o tamanho da resolução em Tablets */
 @media screen and (max-width: 992px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
-  
+
   .modal-content {
     width: 100%;
     height: 100%;
@@ -184,7 +187,7 @@ b.clipedFont {
 
 /* Define o css para o tamanho da resolução em IPad modo Portrait */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {
- 
+
   .modal-dialog-centered {
     margin-left: 10%;
   }
@@ -225,7 +228,7 @@ b.clipedFont {
 
 /* Define o css para o tamanho da resolução em IPad modo Landscape */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) {
-  
+
   .modal-dialog-centered {
     margin-left: 10%;
   }
