@@ -1,7 +1,6 @@
 <div align="center">
 <h1>Clipitch</h1>
-<h2>Conteúdo de Interesse</h2>
-<p>Projeto: Aplicações Web - 1º semestre</p>
+<p>Projeto: Design Centrado no Usuário - 3º semestre</p>
 <p>Sistemas de Informação</p>
 <p>Pontifícia Universidade Católica de Minas Gerais</p>
 
