@@ -13,7 +13,9 @@
 </p>
 
 <p align="center">
-   Indexador de clips providos pela API do Twitch  
+   Indexador de clips providos pela API do Twitch 
+ <br>
+  <a href="Front/README.md">Debug Angular | Front End </a>
 </p>
 
 ## Enredo:
