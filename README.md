@@ -14,7 +14,9 @@
 
 <p align="center">
    Indexador de clips providos pela API do Twitch 
- <br>
+ <br> 
+  <a href="Documentação.docx">Documentação</a>
+ · 
   <a href="Front/README.md">Debug Angular | Front End </a>
 </p>
 
