@@ -16,6 +16,8 @@ export class ModalComponent implements OnInit {
   @Input() profile_image_url!: string;
   @Input() auth: boolean = false;
 
+  idUsuario: string = this.getCookie('user');
+
   constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit() {
@@ -25,11 +27,55 @@ export class ModalComponent implements OnInit {
     this.activeModal.close(sendData);
   }
 
-  favoritarClipe(idClipe : string) {
-    /*ToDo: adicionar em uma lista do usuario os clipes favoritados e no menu para ver quais foram favoritados listar todos.*/
+  favoritarClipe(idClipe: string) {
+
+    this.setCookie('userClipFav', idClipe, 1, 'localhost');
+
+    var stringFormatada = `Clipe \"${idClipe}\" adicionado aos favoritos do usuário \"${this.idUsuario}\".`;
+
+    console.log(stringFormatada)
   }
 
-  avaliarClipe(idClipe: string) {
-    /*ToDo: adicionar avaliação no db.*/
+  avaliarClipe(idClipe: string, notaAvaliacao: string) {
+
+    this.setCookie('userClipAval', idClipe, 1, 'localhost', notaAvaliacao);
+
+    var stringFormatada = `O usuário \"${this.idUsuario}\" avaliou o clipe \"${idClipe}\" com  a nota:  ${notaAvaliacao}`;
+
+    console.log(stringFormatada);
+  }
+
+  login(email : string, senha : string) {
+
+    var idUser = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+
+    this.setCookie('user', idUser, 1, 'localhost');
+
+    var getUser = this.getCookie('user');
+
+    console.log(getUser);
+  }
+
+  setCookie(name: string, value: string, expireDays: number, path: string = '', value1 : string = '') {
+    let d: Date = new Date();
+    d.setTime(d.getTime() + expireDays * 24 * 60 * 60 * 1000);
+    let expires: string = `expires=${d.toUTCString()}`;
+    let cpath: string = path ? `; path=${path}` : '';
+    document.cookie = `${name}=${value};${value1}; ${expires};${cpath}`;
+  }
+
+  getCookie(name: string) {
+    let ca: Array<string> = document.cookie.split(';');
+    let caLen: number = ca.length;
+    let cookieName = `${name}=`;
+    let c: string;
+
+    for (let i: number = 0; i < caLen; i += 1) {
+      c = ca[i].replace(/^\s+/g, '');
+      if (c.indexOf(cookieName) == 0) {
+        return c.substring(cookieName.length, c.length);
+      }
+    }
+    return '';
   }
 }
