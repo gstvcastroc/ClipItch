@@ -4,6 +4,9 @@
   </a>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" style="cursor: pointer" href="#footer">Sobre a Plataforma &nbsp;</a>
+      </li>
       <li class="nav-item active">
         <a class="nav-link" style="cursor: pointer" (click)="abrirModalAuth()">Login &nbsp;<i class="fa fa-user text-white starHover" aria-hidden="true"></i></a>
       </li>
@@ -15,27 +18,27 @@
     <div [style.background-color]="image.color_overlay">
       <img id="multiplyImg" class="d-block w-100 h-50" [src]="image.src" alt="">
       <div class="carousel-caption d-block d-md-block">
-        <h1 class="TekoFont">{{image.game_name}}</h1>
-        <img width="75" src=" {{image.flag}}" alt="/">
-        <p class="PoppinsFont">{{image.description}}</p>
-        <button class="btn btn-lg btn-dark" href="#cards">Ver Todos os Clipes</button>
+        <h1 class="PoppinsFont">{{image.game_name}}</h1>
+        <img width="75" src="{{image.flag}}" alt="/">
+        <p class="PoppinsFont text-justify text-left">{{image.description}}</p>
+        <a class="btn btn-lg btn-dark PoppinsFont" href="#cardClip">Ver Todos os Clipes</a>
       </div>
     </div>
   </ng-template>
 </ngb-carousel>
-<div class="container-fluid bg-light">
+<div id="teste" class="container-fluid bg-light">
   <div class="justify-content-center py-3">
-    <h1 class="text-center TekoFont">Tags</h1>
+    <h1 class="text-center PoppinsFont">Tags</h1>
     <div class="d-flex justify-content-center">
       <button class="btn btn-lg text-dark my-auto" (click)="previous()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
       <div [class]="slides[selectedIndex] == slide ? 'active': 'hidden'" *ngFor="let slide of slides" class="col-1 px-2" align="center">
-        <a href="/"><img class="shadow-lg my-5 rounded-circle" ngbTooltip="{{slide.name}}" placement="bottom" src="{{slide.box_art_url.replace('{width}', '200').replace('{height}', '200')}}"></a>
+        <a href="/"><img class="shadow-lg my-5 rounded-circle img-fluid img-thumbnail" ngbTooltip="{{slide.name}}" placement="bottom" src="{{slide.box_art_url.replace('{width}', '200').replace('{height}', '200')}}"></a>
       </div>
       <button class="btn btn-lg text-dark my-auto" (click)="next()"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
     </div>
   </div>
-  <hr class="my-4 text-dark"/>
-  <div id="cards" class="container">
+  <hr class="my-4 text-dark" />
+  <div id="cardClip" class="container">
     <h1 class="text-center py-3 PoppinsFont">Clipes</h1>
     <div class="row">
       <div *ngFor="let clip of allClips" class="col-md-4 my-2 px-2">
@@ -54,8 +57,26 @@
     </div>
   </div>
 </div>
-<footer class="bg-dark text-center text-lg-start text-white">
-  <div class="text-center p-3">
-    © 2022 Copyright: ClipItch
-  </div>
+<footer id="footer" class="bg-dark text-center text-lg-start text-white p-4">
+  <div class="container">
+    <div class="text-center">
+      <h5><b>Sobre a plataforma:</b></h5>
+      <p class="text-justify text-left">
+        O ClipItch é um indexador de clipes providos pela API da plataforma de streaming <a class="text-white" href="https://www.twitch.tv/">Twitch</a>,
+        o intuito é que tenhamos o máximo de clipes gerados pelos próprios usuários, para que criadores de conteúdo voltados para os jogos,
+        consigam se inspirar e ter uma base de estudos e também, tenhamos oo uso de forma pessoal por inúmeros usuários que procuram esses clipes apenas para entretenimento.
+        O ClipItch surgiu uma vez que notamos a grande procura por conteúdos de entretenimento com um tempo de duração baixo e ainda não existia nenhuma plataforma neste sentido.
+      </p>
+      <section class="mb-4">
+        <!-- Facebook -->
+        <a class="btn btn-link btn-floating btn-lg text-white m-1"
+           href="https://github.com/gstvcastroc/ClipItch"
+           role="button"
+           data-mdb-ripple-color="dark" ngbTooltip="Documentação - Github" placement="right">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </section>
+      © 2022 Copyright: ClipItch
+    </div>
+  </div> 
 </footer>

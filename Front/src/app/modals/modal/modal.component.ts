@@ -33,7 +33,9 @@ export class ModalComponent implements OnInit {
 
     var stringFormatada = `Clipe \"${idClipe}\" adicionado aos favoritos do usuário \"${this.idUsuario}\".`;
 
-    console.log(stringFormatada)
+    console.log(stringFormatada);
+
+    alert(stringFormatada);
   }
 
   avaliarClipe(idClipe: string, notaAvaliacao: string) {
@@ -43,6 +45,8 @@ export class ModalComponent implements OnInit {
     var stringFormatada = `O usuário \"${this.idUsuario}\" avaliou o clipe \"${idClipe}\" com  a nota:  ${notaAvaliacao}`;
 
     console.log(stringFormatada);
+
+    alert(stringFormatada);
   }
 
   login(email : string, senha : string) {
@@ -54,6 +58,10 @@ export class ModalComponent implements OnInit {
     var getUser = this.getCookie('user');
 
     console.log(getUser);
+
+    var stringFormatada = `Login de id: \"${this.idUsuario}\" feito com sucesso.`;
+
+    alert(stringFormatada);
   }
 
   setCookie(name: string, value: string, expireDays: number, path: string = '', value1 : string = '') {
