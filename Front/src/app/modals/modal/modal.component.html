@@ -16,8 +16,8 @@
         <i class="text-white">{{title}}</i><br /><br />
         <b class="py-1 px-2 rounded gameFont">{{game_name}}</b>&nbsp;
         <b for="rangeAvaliarClipe" class="py-1 px-2 rounded bg-custom">Avaliar Clipe:</b>&nbsp;
-        <label class="text-white">0</label><input type="range" class="form-sm-range mx-2" min="0" max="10" id="rangeAvaliarClipe"><label class="text-white">10</label>
-        <a class="btn text-white starHover" ngbTooltip="Avaliar" placement="top" (click)="avaliarClipe(id)"><i class="fa fa-check" aria-hidden="true"></i></a>
+        <label class="text-white">0</label><input type="range" class="form-sm-range mx-2" min="0" max="10" id="rangeAvaliarClipe" #range><label class="text-white">10</label>
+        <a class="btn text-white starHover" ngbTooltip="Avaliar" placement="top" (click)="avaliarClipe(id, range.value)"><i class="fa fa-check" aria-hidden="true"></i></a>
         <a class="btn text-white starHover" ngbTooltip="Adicionar aos favoritos" placement="top" (click)="favoritarClipe(id)"><i class="fa fa-star" aria-hidden="true"></i></a>
       </div>
     </div>
@@ -28,13 +28,13 @@
         <form class="text-white">
           <div class="form-group">
             <label for="inpEmail"><b>E-mail:</b></label>
-            <input type="email" class="form-control" id="inpEmail" aria-describedby="emailHelp" placeholder="E-mail" maxlength="250">
+            <input type="email" class="form-control" id="inpEmail" aria-describedby="emailHelp" placeholder="E-mail" maxlength="250" #email>
           </div>
           <div class="form-group">
             <label for="inpPassword"><b>Senha:</b></label>
-            <input type="password" class="form-control" id="inpPassword" placeholder="Senha" maxlength="15">
+            <input type="password" class="form-control" id="inpPassword" placeholder="Senha" maxlength="15" #password>
           </div>
-          <button type="submit" class="my-4 btn btn-md btn-success text-white">Entrar <i class="fa-solid fa-door-open"></i></button>
+          <button type="submit" (click)="login(email.value, password.value)" class="my-4 btn btn-md btn-success text-white">Entrar <i class="fa-solid fa-door-open"></i></button>
         </form>
       </div>
     </div>

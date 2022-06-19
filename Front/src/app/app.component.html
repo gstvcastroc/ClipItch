@@ -18,7 +18,7 @@
         <h1 class="TekoFont">{{image.game_name}}</h1>
         <img width="75" src=" {{image.flag}}" alt="/">
         <p class="PoppinsFont">{{image.description}}</p>
-        <button class="btn btn-lg btn-dark" href="">Ver Todos os Clipes</button>
+        <button class="btn btn-lg btn-dark" href="#cards">Ver Todos os Clipes</button>
       </div>
     </div>
   </ng-template>
@@ -35,7 +35,7 @@
     </div>
   </div>
   <hr class="my-4 text-dark"/>
-  <div class="container">
+  <div id="cards" class="container">
     <h1 class="text-center py-3 PoppinsFont">Clipes</h1>
     <div class="row">
       <div *ngFor="let clip of allClips" class="col-md-4 my-2 px-2">
