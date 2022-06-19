@@ -8,7 +8,7 @@
  </div>
 
 <p align="center">
-  <img width="200" src="src/clipitch/imgs/logo.png" alt="Logo Clipitch">  
+  <img width="200" src="Front/src/assets/images/logo.png" alt="Logo Clipitch">  
   <br>
 </p>
 
@@ -35,8 +35,7 @@ Portanto, a proposta tem por objetivo sanar a assimetria de informações existe
  
 ## Integrantes
 
-<a href="https://github.com/alonso-boj" title="Alonso Batista" rel="nofollow"><img src="docs/img/alonso.png" alt="logo" data-canonical-src="https://github.com/alonso-boj" width="100vw"/></a>
-<a href="https://github.com/gstvcastroc" title="Gustavo Castro" rel="nofollow"><img src="docs/img/gustavo.png" alt="logo" data-canonical-src="https://github.com/gstvcastroc" width="100vw"/></a>
-<a href="https://github.com/halexmaciel" title="Halex Maciel" rel="nofollow"><img src="docs/img/halex.png" alt="logo" data-canonical-src="https://github.com/halexmaciel" width="100vw"/></a>
-<a href="https://github.com/WelbertJr" title="Welbert Júnior" rel="nofollow"><img src="docs/img/Welbert.png" alt="logo" data-canonical-src="https://github.com/WelbertJr" width="100vw"/></a>
- <a href="https://github.com/Robsonezequiel" title="Robson Ezequiel" rel="nofollow"><img src="docs/img/robson.png" alt="logo" data-canonical-src="https://github.com/Robsonezequiel" width="100vw"/></a>
+<a href="https://github.com/alonso-boj" title="Alonso Batista" rel="nofollow"><img src="Front/src/assets/images/alonso.png" alt="logo" data-canonical-src="https://github.com/alonso-boj" width="100vw"/></a>
+<a href="https://github.com/gstvcastroc" title="Gustavo Castro" rel="nofollow"><img src="Front/src/assets/images/gustavo.png" alt="logo" data-canonical-src="https://github.com/gstvcastroc" width="100vw"/></a>
+<a href="https://github.com/halexmaciel" title="Halex Maciel" rel="nofollow"><img src="Front/src/assets/images/halex.png" alt="logo" data-canonical-src="https://github.com/halexmaciel" width="100vw"/></a>
+<a href="https://github.com/WelbertJr" title="Welbert Júnior" rel="nofollow"><img src="Front/src/assets/images/Welbert.png" alt="logo" data-canonical-src="https://github.com/WelbertJr" width="100vw"/></a>
