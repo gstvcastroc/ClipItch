@@ -17,6 +17,7 @@ export class ModalComponent implements OnInit {
   @Input() auth: boolean = false;
 
   idUsuario: string = this.getCookie('user');
+  rangeVal: string = '';
 
   constructor(public activeModal: NgbActiveModal) { }
 

@@ -80,4 +80,8 @@ export class AppComponent implements OnInit {
 
     modalRef.componentInstance.auth = true;
   }
+
+  notImplemented() {
+    alert('Não implementado!')
+  }
 }
