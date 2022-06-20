@@ -12,6 +12,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './modals/modal/modal.component';
 import { SafePipe } from './safe.pipe';
 
+import { FormsModule } from '@angular/forms'
+
 registerLocaleData(localePt);
 
 @NgModule({
@@ -24,7 +26,8 @@ registerLocaleData(localePt);
     BrowserModule,
     NgbModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   entryComponents: [
     ModalComponent
