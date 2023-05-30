@@ -20,6 +20,17 @@ namespace API
     {
       services.AddControllers();
 
+      services.AddCors(
+            options =>
+            {
+                options.AddPolicy(
+                    "Any",
+                    cors =>
+                    {
+                        cors.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                    });
+            });
+
       services.ResolveDependencies(Configuration);
     }
 
@@ -35,6 +46,8 @@ namespace API
           options.SwaggerEndpoint("/swagger/v1/swagger.json", "Clipitch");
         });
       }
+
+      app.UseCors("Any");
 
       app.UseHttpsRedirection();
 

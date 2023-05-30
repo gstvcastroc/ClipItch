@@ -40,6 +40,11 @@ namespace API.Data.Mappings
         .HasColumnType("TEXT")
         .HasMaxLength(120);
 
+      builder.Property(x => x.BroadcasterProfileImageUrl)
+        .HasColumnName("broadcaster_profile_image_url")
+        .HasColumnType("TEXT")
+        .HasMaxLength(120);
+
       builder.Property(x => x.CreatorId)
         .HasColumnName("creator_id")
         .HasColumnType("TEXT")

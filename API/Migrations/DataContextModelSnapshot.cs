@@ -34,6 +34,11 @@ namespace API.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("broadcaster_name");
 
+                    b.Property<string>("BroadcasterProfileImageUrl")
+                        .HasMaxLength(120)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("broadcaster_profile_image_url");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasMaxLength(120)
                         .HasColumnType("TEXT")
