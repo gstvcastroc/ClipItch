@@ -92,7 +92,7 @@ namespace API.Data.Mappings
 
       builder.Property(x => x.Duration)
         .HasColumnName("duration")
-        .HasColumnType("REAL")
+        .HasColumnType("NUMERIC")
         .HasMaxLength(120);
     }
   }

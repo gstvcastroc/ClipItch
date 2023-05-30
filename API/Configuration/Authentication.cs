@@ -10,10 +10,10 @@ namespace API.Configuration
   public class Authentication : IAuthentication
   {
     // Propriedade que representa o client ID da API do Twitch.
-    public string ClientId { get; } = "kgl6s2v5suh14svu58vdbdzpazxc0j";
+    public string ClientId { get; } = "wlbp0x5pkyw3p2zr1ttqhmy1faur3d";
 
     // Constantes que representam o client secret e grant type da API do Twitch. 
-    const string CLIENT_SECRET = "1gh4hvydxoow3byxqavpf8iepgsuui";
+    const string CLIENT_SECRET = "mxqi1gf8j031i1m384hh3lgvk6tw0n";
     const string GRANT_TYPE = "client_credentials";
 
     public async Task<Token> GetToken()

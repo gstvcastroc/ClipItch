@@ -11,13 +11,12 @@ namespace API.Data
     public DbSet<Game> Games { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite(@"Data Source=Clipitch.db")
+            => options.UseNpgsql(@"server=db-clipitch.cuqu75ttemrd.us-east-1.rds.amazonaws.com;Port=5432;user id=main;password=admin123;database=postgres")
       
       .LogTo(Console.WriteLine);
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-      modelBuilder.UseCollation("NOCASE");
       modelBuilder.ApplyConfiguration(new ClipMap());
       modelBuilder.ApplyConfiguration(new GameMap());
     }
